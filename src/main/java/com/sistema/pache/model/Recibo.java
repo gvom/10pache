@@ -3,6 +3,7 @@ package com.sistema.pache.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,7 +29,7 @@ private static final long serialVersionUID = 1L;
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int reciboId;
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinColumn(name = "clienteId")
     private Cliente cliente;
 	@DateTimeFormat(pattern="dd/MM/yyyy")

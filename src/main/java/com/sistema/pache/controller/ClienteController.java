@@ -97,12 +97,12 @@ public class ClienteController {
 		BCryptPasswordEncoder b = new BCryptPasswordEncoder();
 		
 		Usuario usr = (Usuario) session.getAttribute("usrLogado");
-    	cliente.setUsuario(usr);
 		
 		 if (cliente.getClienteId() > 0) {
 	            if (result.hasErrors()){               	                              
 	                return "redirect:/cliente/novo";
 	            }else{
+	            	cliente.setUsuario(clienteService.buscarPorId(cliente.getClienteId()).getUsuario());
 	                clienteService.atualizar(cliente);
 	                redirectAttributes.addFlashAttribute("msg","Cliente alterado com sucesso!");
 	            }
@@ -111,6 +111,7 @@ public class ClienteController {
 	            if (result.hasErrors()) {
 	            	return "redirect:/cliente/novo";
 	            } else {
+	            	cliente.setUsuario(usr);
 	            	clienteService.salvar(cliente);
 	                redirectAttributes.addFlashAttribute("msg","Cliente cadastrado com sucesso!"); 
 	            }

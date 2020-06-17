@@ -113,7 +113,6 @@ public class ReciboController {
 		BCryptPasswordEncoder b = new BCryptPasswordEncoder();
 		
 		Usuario usr = (Usuario) session.getAttribute("usrLogado");
-    	recibo.setUsuario(usr);
 		
 		if(recibo.getStatus() == 2) {
 			recibo.setStatus(3);
@@ -147,6 +146,9 @@ public class ReciboController {
 	            			enderecoService.atualizar(enderecoTemp);
 	            		}
 	            	}
+	            	Recibo recTe = reciboService.buscarPorId(recibo.getReciboId());
+	            	recibo.getCliente().setUsuario(recTe.getUsuario());
+	            	recibo.setUsuario(recTe.getUsuario());
 	                reciboService.atualizar(recibo);
 	                redirectAttributes.addFlashAttribute("msg","Recibo alterado com sucesso!");
 	            }
@@ -155,6 +157,8 @@ public class ReciboController {
 	            if (result.hasErrors()) {
 	            	return "redirect:/recibo/novo";
 	            } else {
+	            	recibo.getCliente().setUsuario(usr);
+	            	recibo.setUsuario(usr);
 	            	recibo.setData(data);
 	            	recibo.setDataCadastro(new Date());
 	            	reciboService.salvar(recibo);

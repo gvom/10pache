@@ -273,7 +273,7 @@ body {
 	                sn: senhaAntiga
 	            },
 	            success: function (data) {
-	               if(data == "true"){
+	               if(data == "true" || $("#idUserAlt").val() != 0){
 	            		var senha = $("#novaSenha").val();
 		       			var confirme = $("#confirme").val();
 	
@@ -302,7 +302,7 @@ body {
 
 		function alterarSenhaDigitalAC() {
 			var $myForm = $('#formAlterarSenha');
-			if ($myForm[0].checkValidity()) {
+			if ($myForm[0].checkValidity() || $("#idUserAlt").val() != 0) {
 				verificaSenhaConfirmacao();
 			} else {
 				new PNotify({
@@ -329,7 +329,7 @@ body {
 			$("#conteudo").load(this.href + "/conteudo", function() {
 				$("#aguarde").hide();
 			});
-			window.history.pushState("", "Digital AC", this.href);
+			window.history.pushState("", "10PACHE", this.href);
 		});
 
 		$( document ).ready(function() {

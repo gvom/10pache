@@ -151,12 +151,16 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/usuario/alterarSenha")
-    public String alterarSenha(@RequestParam("senhaAntiga") String senhaAntiga,
+    public String alterarSenha(@RequestParam("senhaAntiga") String senhaAntiga, @RequestParam("idUserAlt") int idUserAlt,
             @RequestParam("novaSenha") String novaSenha, @RequestParam("confirme") String confirme, RedirectAttributes redirectAttributes){
-		Usuario usr = (Usuario) session.getAttribute("usrLogado");
-
-        String conf = usuarioService.alterarSenha(senhaAntiga, novaSenha, confirme, usr.getUsuarioId());
-        
+		if(idUserAlt == 0) {
+			Usuario usr = (Usuario) session.getAttribute("usrLogado");
+	        String conf = usuarioService.alterarSenha(senhaAntiga, novaSenha, confirme, usr.getUsuarioId());
+		}else {
+			Usuario userAlt = usuarioService.buscarPorId(idUserAlt);
+			String conf = usuarioService.alterarSenhaAlt(novaSenha, confirme, userAlt.getUsuarioId());
+		}
+		
         return "redirect:/index";
     }
 	

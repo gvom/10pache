@@ -65,6 +65,20 @@ public class UsuarioService {
         return retorno;
     } 
 	
+	@Transactional
+    public String alterarSenhaAlt(String novaSenha,
+             String confirme, int idUsuario){
+        
+    	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();        	
+        String retorno = "";
+        Usuario usuario = this.repository.findById(idUsuario);              
+        novaSenha = encoder.encode(novaSenha);       
+        usuario.setSenha(novaSenha);
+        this.repository.save(usuario);
+        retorno += "true";
+        return retorno;
+    } 
+	
 	public Usuario criptografaSenha(Usuario usuario){
     	
     	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();       

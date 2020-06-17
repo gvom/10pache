@@ -130,7 +130,11 @@
 									</div>
 									<div class="form-group col-md-3">
 										<label class="control-label" for="nomeCompleto"> Senha</label>
-										<input type="password" autofocus class="form-control" th:field="*{senha}" id="senha" autocomplete="off" placeholder="*****" th:tabindex="${usuario.senha == '' ? '0' : '-1'}">
+										<input type="password" autofocus class="form-control" th:field="*{senha}" id="senha" autocomplete="off" placeholder="*****" th:tabindex="${usuario.senha == '' ? '0' : '-1'}" th:style="${usuario.usuarioId > 0 ? 'pointer-events: none;' : ''}">
+									</div>
+									<div class="form-group col-md-3">
+									<label class="control-label" for="nomeCompleto"> &nbsp;</label>
+										<button type="button" class="btn btn-primary" th:style="${usuario.usuarioId > 0 ? 'display: block;' : 'display: none;'}" th:onclick="'altSenha(' + ${usuario.usuarioId} +')'">Alterar Senha</button>
 									</div>
 								</div>
 								<div class="row">
@@ -198,7 +202,12 @@
 		</section>
 		<th:block layout:fragment="javascript-extra">
 			<script>
-			$(document).ready(function(){	
+			$(document).ready(function(){
+				$('#modalAlterarSenhaDigitalAC').on('hidden.bs.modal', function () {
+					$("#atual").css("display", "block");
+					$("#idUserAlt").val(0);
+				});
+				
 				$("#cep").blur(function() {
 					//Nova variável "cep" somente com dígitos.
 					var cep = $(this).val().replace(
@@ -266,6 +275,12 @@
 			            //alert('falhou');
 			        }
 			    });
+			}
+			
+			function altSenha(id){
+				$("#modalAlterarSenhaDigitalAC").modal('show');
+				$("#atual").css("display", "none");
+				$("#idUserAlt").val(id);
 			}
 			</script>
 		</th:block>
