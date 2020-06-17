@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+
+<meta charset="utf-8"></meta>
+
+
+</head>
+<aside class="main-sidebar" th:fragment="sidebar">
+	<!-- sidebar: style can be found in sidebar.less -->
+	<section class="sidebar">
+		<!-- sidebar menu: : style can be found in sidebar.less -->
+		<ul class="sidebar-menu">
+			<li class="header">NAVEGAÇÃO PRINCIPAL</li>
+
+			
+			<li class="treeview" th:if="${session.usrLogado.tipoUsuario == 0}"><a href="#"> <i class="fa fa-cogs"></i><span>Administrador</span>
+					<span class="pull-right-container"> <i
+						class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+				<ul class="treeview-menu">
+				
+					<li class="blockCountdown"><a th:href="@{/usuario/lista}"
+						class="menu-link"><i class="fa fa-user"></i>Usuarios</a></li>
+					
+					<li class="blockCountdown"><a th:href="@{/usuario/leads}"
+						><i class="fa fa-handshake-o"></i>Leads</a></li>
+						
+					<li class="blockCountdown"><a th:href="@{/contato/lista}"
+						><i class="fa fa-envelope"></i>Contatos</a></li>
+				</ul>
+			</li>
+							
+			<li>
+				<a th:href="@{/cliente/lista}">
+					<i class="fa fa-user"></i> <span>Cliente</span>
+					<span class="pull-right-container"></span>
+				</a>
+	        </li>
+	        <li>
+				<a th:href="@{/recibo/lista}">
+					<i class="fa fa-file-text-o"></i> <span>Recibo</span>
+					<span class="pull-right-container"></span>
+				</a>
+	        </li>
+		</ul>
+	</section>
+
+</aside>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/layout/layoutPadrao}">
+
+<head>
+
+<meta charset="utf-8"></meta>
+<title>Cliente</title>
+
+<style type="text/css">
+.dt-buttons.btn-group {
+    margin-bottom: 15px;
+}
+</style>
+</head>
+<body>
+	<div layout:fragment="conteudo" th:fragment="conteudo">
+
+		<section class="content-header">
+			<h1>
+				Cliente <small>Listagem</small>
+			</h1>
+			<ol class="breadcrumb">
+				<li><a th:href="@{/portal}"><i class="fa fa-dashboard"></i>Principal</a></li>
+				<li><a href="#">Cliente</a></li>
+				<li class="active">Listagem</li>
+			</ol>
+		</section>
+
+		<!-- Main content -->
+		<section class="content">
+			<!-- Default box -->
+			<div class="row">
+				<div class="col-md-12">
+					<div class="box box-info">
+						<div class="box-header with-border">
+							<a class="btn btn-primary menu-link" th:href="@{/cliente/novo}"><i class="fa fa-plus"></i> Nova</a>
+						</div>
+						<div class="box-body" th:fragment="lista" id="lista">
+							<table id="tabelagenerica" class="table table-bordered table-striped table-hover" width="100%">
+								<thead>
+									<tr>
+										<th class="col-md-1" th:if="${session.usrLogado.tipoUsuario == 0}">Codigo Usuário</th>
+										<th class="col-md-1">Codigo</th>
+										<th class="col-md-5">Nome</th>
+										<th class="col-md-2">Telefone</th>
+										<th class="col-md-2">CPF/CNPJ</th>
+										<th class="col-md-1">Ação</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="clientes : ${lstCliente}">
+										<td th:if="${session.usrLogado.tipoUsuario == 0}" th:text="${clientes.usuario.usuarioId}"></td>
+										<td th:text="${clientes.clienteId}" class="min-width"></td>
+										<td th:text="${clientes.nome}" class="min-width"></td>
+										<td th:text="${clientes.telefone}" class="min-width"></td>
+										<td th:text="${clientes.cpf}" class="min-width"></td>
+										<td align="center" style="width: 45px;">
+											<a th:href="@{/cliente/atualizar/} + ${clientes.clienteId}" class="menu-link"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+											&nbsp;
+											<a th:href="@{/cliente/remove/}+${clientes.clienteId}"><span class="glyphicon glyphicon-trash text-red"></span></a>
+										</td>
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr>
+										<th class="col-md-1" th:if="${session.usrLogado.tipoUsuario == 0}">Codigo Usuário</th>
+										<th class="col-md-1">Codigo</th>
+										<th class="col-md-5">Nome</th>
+										<th class="col-md-2">Telefone</th>
+										<th class="col-md-2">CPF/CNPJ</th>
+										<th class="col-md-1">Ação</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<th:block layout:fragment="javascript-extra">
+			<script>
+				$( document ).ready(function() {
+					$('table').DataTable({
+		                stateSave : true,
+		                responsive : true,
+		                "bSort" : true,
+		                dom : 'Blfrtip',
+		                buttons : [ 'csv', 'excel', 'pdf' ]
+		            });
+				});
+			</script>
+		</th:block>
+	</div>
+</body>
+</html>

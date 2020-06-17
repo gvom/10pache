@@ -1,0 +1,71 @@
+
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/layout/layoutPadrao}">
+
+<head>
+
+<meta charset="utf-8"></meta>
+<title>Painel de Controle</title>
+
+</head>
+
+<body>
+	<div layout:fragment="conteudo" th:fragment="conteudo">
+
+		<section class="content-header">
+			<h1>
+				Painel de Controle<small>Gerência</small>
+			</h1>
+			<ol class="breadcrumb">
+				<li><a th:href="@{/user/lista}"><i class="fa fa-dashboard"></i>Principal</a></li>
+				<li><a href="#">Admin</a></li>
+				<li class="active">Painel de Controle</li>
+			</ol>
+		</section>
+
+		<!-- Main content -->
+		<section class="content">
+			<!-- Default box -->
+			<div class="row">
+				<div class="col-md-12">
+					<div class="box box-info">
+						<div class="box-header with-border">
+							<a class="btn btn-primary pull-right" th:href="@{/recibo/novoAlt}"><i class="fa fa-plus"></i> Novo Recibo</a>
+						</div>
+						<div class="box-body">
+						
+							<div class="col-md-4">
+								<div class="recibos-container" th:each="recibos : ${lstRecibos}">
+									<div class="recibo">
+										<div class="recibo-preview">
+											<h6 style="margin-top: 0px;">Situação do Recibo</h6>
+											<th:block th:switch="${recibos.status}">
+											    <h4 th:case="0"><b>Cadastrado</b></h4>
+											    <h4 th:case="1"><b>Em Vistoria</b></h4>
+											    <h4 th:case="2"><b>Entrada na Delegacia</b></h4>
+											    <h4 th:case="3"><b>Retirada da Delegacia</b></h4>
+											    <h4 th:case="4"><b>Entrega ao Cliente</b></h4>
+											</th:block>
+										</div>
+										<div class="recibo-info">
+											<h6>Informações</h6>
+											<h4><b th:text="${recibos.placa}"><b></h4>
+											<h4><b th:text="${#dates.format(recibos.data, 'dd/MM/yyyy')}"><b></h4>
+											<h4 style="position: absolute;"><b th:text="${recibos.cliente.telefone}"><b></h4>
+											<a class="btnRec btn" th:href="@{/recibo/atualizar/} + ${recibos.reciboId}"><i class="fa fa-eye" aria-hidden="true"></i> Abir Recibo</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</body>
+</html>

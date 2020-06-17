@@ -1,0 +1,108 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/layout/layoutPadrao}">
+
+<head>
+
+<meta charset="utf-8"></meta>
+<title>Leads</title>
+
+<style type="text/css">
+.dt-buttons.btn-group {
+    margin-bottom: 15px;
+}
+</style>
+</head>
+<body>
+	<div layout:fragment="conteudo" th:fragment="conteudo">
+
+		<section class="content-header">
+			<h1>
+				Leads <small>Listagem</small>
+			</h1>
+			<ol class="breadcrumb">
+				<li><a th:href="@{/portal}"><i class="fa fa-dashboard"></i>Principal</a></li>
+				<li><a href="#">Leads</a></li>
+				<li class="active">Listagem</li>
+			</ol>
+		</section>
+
+		<!-- Main content -->
+		<section class="content">
+			<!-- Default box -->
+			<div class="row">
+				<div class="col-md-12">
+					<div class="box box-info">
+						<div class="box-header with-border">
+						</div>
+						<div class="box-body" th:fragment="lista" id="lista">
+							<table id="tabelagenerica" class="table table-bordered table-striped table-hover" width="100%">
+								<thead>
+									<tr>
+										<th class="col-md-1">Codigo</th>
+										<th class="col-md-3">Nome</th>
+										<th class="col-md-2">Telefone</th>
+										<th class="col-md-2">Email</th>
+										<th class="col-md-2">Data</th>
+										<th class="col-md-1">Ação</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="usuarios : ${lstUsuario}" th:style="${usuarios.comfirmeLead == 1 ? 'background-color: #00800054;' : ''}" th:id="${usuarios.usuarioId}">
+										<td th:text="${usuarios.usuarioId}" class="min-width"></td>
+										<td th:text="${usuarios.nome}" class="min-width"></td>
+										<td th:text="${usuarios.telefone}" class="min-width"></td>
+										<td th:text="${usuarios.email}" class="min-width"></td>
+										<td th:text="${#dates.format(usuarios.dtCadastro, 'dd/MM/yyyy')}" class="min-width"></td>
+										<td align="center" style="width: 45px;">
+											<button th:onclick="'confirme(' + ${usuarios.usuarioId} + ');'" style="background-color: #abd5ab00; border: none;"><span class="fa fa-check-square-o text-green"></span> Confirmar</button>
+										</td>
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr>
+										<th class="col-md-1">Codigo</th>
+										<th class="col-md-3">Nome</th>
+										<th class="col-md-2">Telefone</th>
+										<th class="col-md-2">Email</th>
+										<th class="col-md-2">Data</th>
+										<th class="col-md-1">Ação</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<th:block layout:fragment="javascript-extra">
+			<script>
+				$( document ).ready(function() {
+					$('table').DataTable({
+		                stateSave : true,
+		                responsive : true,
+		                "bSort" : true,
+		                dom : 'Blfrtip',
+		                buttons : [ 'csv', 'excel', 'pdf' ]
+		            });
+				});
+				
+				function confirme(id){
+					$.ajax({
+				        type: "POST",
+				        url: '/usuario/confirmarLead/'+id,
+				        success: function (data) {
+				        	$("#"+id).css("background-color", "#00800054");
+				        },
+				        error: function () {
+				            //alert('falhou');
+				        }
+				    });
+				}
+			</script>
+		</th:block>
+	</div>
+</body>
+</html>

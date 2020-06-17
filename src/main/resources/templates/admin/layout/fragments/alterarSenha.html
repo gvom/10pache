@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8"></meta>
+</head>
+<div class="modal fade" id="modalAlterarSenhaDigitalAC" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" th:fragment="alterarSenha">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3 class="modal-title" id="myModalLabel">Alterar Senha (Digital AC)</h3>
+			</div>
+			<div class="modal-body">
+				<form method="post" id="formAlterarSenha" th:action="@{/usuario/alterarSenha}">					
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="control-label">Senha Atual</label> 
+								<input type="password" class="form-control" name="senhaAntiga" id="senhaAntiga" required/>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="control-label">Nova Senha</label> 
+								<input type="password" class="form-control" name="novaSenha" id="novaSenha" required/>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="control-label">Confirme</label> 
+								<input type="password" class="form-control" name="confirme" id="confirme" required/>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" style="display: none;"></button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+				<a href="javascript:alterarSenhaDigitalAC();" class="btn btn-success"><i class="fa fa-check"></i>&nbsp; Alterar</a>
+			</div>
+		</div>
+	</div>
+</div>
+</html>

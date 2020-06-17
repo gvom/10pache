@@ -1,0 +1,60 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="pt" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+
+<meta charset="UTF-8"></meta>
+</head>
+<body>
+
+	<header class="main-header" th:fragment="cabecalho">
+		<a th:href="@{/index}" class="logo" style="background-color: #2B369C !important;"> <!-- mini logo for sidebar mini 50x50 pixels -->
+			<span class="logo-mini" style="background-color: #2B369C !important;"><img th:src="@{/imgs/logo-simples.png}" style="height: 18px;"></span> <!-- logo for regular state and mobile devices -->
+			<span class="logo-lg" style="background-color: #2B369C !important;"><b style="color: #f79d2e">10</b>PACHE</span>
+		</a>
+		<!-- Header Navbar: style can be found in header.less -->
+		<nav class="navbar navbar-static-top" style="background-color: #2B369C !important;">
+			<!-- Sidebar toggle button-->
+			<a href="#" class="sidebar-toggle" data-toggle="offcanvas"
+				role="button"> <span class="sr-only">Esconder Menu</span> <span
+				class="icon-bar"></span> <span class="icon-bar"></span> <span
+				class="icon-bar"></span>
+			</a>
+			<div class="navbar-custom-menu" id="menuLat">
+				<ul class="nav navbar-nav">
+					<li class="dropdown user user-menu"><a href="#"
+						class="dropdown-toggle" data-toggle="dropdown"> <img
+							th:src="@{/imgs/avatar.png}" class="user-image" alt="User Image" />
+							<span class="hidden-xs"
+							th:text="${session.usrLogado.nome}" >Usuário</span>
+					</a>
+						<ul class="dropdown-menu">
+							<!-- User image -->
+							<li class="user-header" style="background-color: #2B369C !important;"><img th:src="@{/imgs/avatar.png}"
+								class="img-circle" alt="User Image" />
+
+								<p th:text="${session.usrLogado.nome}" style="margin-bottom: 0px;">
+									<small>Usuário</small>
+								</p><small style="color: white;">Codigo do Usuário: <b th:text="${session.usrLogado.usuarioId}"></b></small></li>
+							<!-- Menu Body -->
+							<!-- Menu Footer-->
+							<li class="user-footer">
+								<div class="pull-left">
+									<a data-target="#modalAlterarSenhaDigitalAC"
+										data-toggle="modal" href="#" class="btn btn-default btn-flat">Alterar
+										Senha</a>
+								</div>
+								<div class="pull-right">
+									<a id="btLogout" th:href="@{/logout}" class="btn btn-default btn-flat">Sair</a>
+								</div>
+							</li>
+						</ul></li>
+				</ul>
+			</div>
+		</nav>
+
+	</header>
+
+</body>
+</html>

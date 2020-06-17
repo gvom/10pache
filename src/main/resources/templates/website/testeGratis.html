@@ -1,0 +1,403 @@
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.4-beta.33/jquery.inputmask.min.js"></script>
+<script th:src="@{/plugins/webpage/js/scripts.js}"></script>
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.css" >
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link th:href="@{/plugins/webpage/css/styles.css}" rel="stylesheet">
+
+
+<!doctype html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<meta charset="UTF-8">
+
+<head>
+
+	<title>Teste Gratuito - Sistema para Gestão de Despache Automotivo Online</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<style>
+	.async-hide {
+		opacity: 0 !important
+	}
+	</style>
+	<style type="text/css" id="wp-custom-css">
+	* {
+		font-family: 'PT Sans', sans-serif;
+		color: #505050;
+	}
+	
+	html {
+		margin: 0;
+		padding: 0;
+		margin-top: 0 !important;
+	}
+	
+	body {
+		background-image:
+			url(../imgs/fundo.jpg);
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-attachment: fixed;
+		overflow-x: hidden;
+		margin: 0;
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+			"Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
+			"Segoe UI Emoji", "Segoe UI Symbol";
+		font-size: 1rem;
+		font-weight: 400;
+		line-height: 1.5;
+		color: #212529;
+		text-align: left;
+		background-color: #fff;
+		background-size: contain;
+	    background-position-x: -130px;
+	}
+	
+	.page_title .open_advantages {
+		display: none;
+	}
+	
+	.page_title {
+		text-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5);
+	}
+	
+	.page_title h1.main_logo {
+		display: block;
+		width: 240px;
+		height: 60px;
+		overflow: hidden;
+		text-indent: -9999px;
+		background-image: url(imagens/logo_sajadv_white.svg);
+		background-size: contain;
+		background-position: left center;
+		background-repeat: no-repeat;
+		color: #ffffff;
+	}
+	
+	.page_title p.lead {
+		font-size: 24px;
+		line-height: 34px;
+		margin-bottom: 30px;
+		color: #212C31;
+		max-width: 440px;
+		font-weight: 700;
+	}
+	
+	.page_title .open_advantages {
+		display: none;
+	}
+	
+	@media screen and (max-width: 992px) {
+		.page_title {
+			padding: 40px 0;
+		}
+		.page_title .open_advantages {
+			display: block;
+		}
+		.page_title .open_advantages:not(:focus ):not(:active ):not(:hover )
+			{
+			color: #111 !important;
+		}
+	}
+	
+	.page_advantages {
+		text-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5);
+	}
+	
+	.page_advantages strong {
+		color: #212C31;
+	}
+	
+	.page_advantages ul {
+		padding-left: 0px;
+	}
+	
+	.page_advantages ul li {
+		list-style: none;
+		font-size: 18px;
+		padding: 0px 24px 24px 36px;
+		color: #212C31;
+		position: relative;
+	}
+	
+	.page_advantages ul li i {
+		position: absolute;
+		color: #212C31;
+		left: 0;
+		top: 2px;
+	}
+	
+	@media screen and (max-width: 992px) {
+		.page_advantages {
+			height: 0;
+			overflow: hidden;
+			transition: height .4s;
+		}
+		body{
+			background-size: cover;
+		}
+	}
+	
+	.lead {
+		font-size: 1.25rem !important;
+		font-weight: 300;
+		color: #212C31;
+	}
+	
+	p {
+		margin-top: 0;
+		margin-bottom: 1rem !important;
+	}
+	
+	.form-page {
+		margin-top: 30px;
+	}
+	
+	label {
+		font-size: 14px;
+		margin-bottom: 4px;
+	}
+	
+	.form-control {
+		display: block;
+		width: 100%;
+		padding: 0.375rem 0.75rem;
+		font-size: 1rem;
+		line-height: 1.5;
+		color: #495057;
+		background-color: #fff;
+		background-image: none;
+		background-clip: padding-box;
+		border: 1px solid #ced4da;
+		border-radius: 0.25rem;
+		transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+	}
+	
+	.btn-primary {
+		color: #111;
+		background-color: #f49a2b;
+		border-color: #f49a2b;
+		color: #ffffff;
+		margin-top: 5%;
+	}
+	
+	.btn-primary:hover {
+		color: #fff;
+		background-color: #2b369c;
+		border-color: #2b369c;
+		cursor: pointer;
+	}
+	a.back-to-top {
+			background: #f79d2e url("../imgs/webpage/left-arrow.png") no-repeat center 47%;
+		}
+	</style>
+</head>
+
+<body class="page-template page-template-page-experimente page-template-page-experimente-php page page-id-3398">
+	<a th:href="@{/}" class="back-to-top page-scroll" style="display: inline; left: 0.75rem; top: 0.75rem;">Voltar WebSite</a>
+	<div class="spinner-wrapper">
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+	<div class="container">
+		<div class="row">
+			<div class="col col-md-6 col-sm-12 col-xs-12 order-2 order-md-1" style="padding-top: 15%;">
+				<!-- logo -->
+				<div class="page_title" style="padding-left: 35px; text-align: justify;">
+					<img th:src="@{/imgs/10pache-logo.png}"
+						data-no-lazy="1" alt="software-despache" width="50%"
+						style="padding-bottom: 10px;"><a th:href="@{/}" class="btn btn-outline pull-right" style="float:right; margin: 0px 35px; background: #2a359b; color: white;">Saiba mais</a>
+					<p class="lead">Sistema de emissão e organização de documentos de veículos,
+						que auxilia na gestão de documentos, clientes e prazos de forma simples e pratica!</p>
+				</div>
+				<!-- vantagens -->
+				<div class="page_advantages" style="padding-left: 35px; padding-right: 35px; text-align: justify;">
+					<i class="material-icons"
+						style="transform: rotate(180deg);">format_quote</i>Todos os
+						dias, quando abrem a tela inicial do 10PACHE, cada despachante
+						encontra um painel com os compromissos do dia, tarefas atrasadas
+						e prioridades. E gera economia de tempo. O tempo é limitado, mas
+						com 10PACHE o despachante puderá focar em outras atividades. - Carlos Rubens
+					<i class="material-icons">format_quote</i>
+				</div>
+			</div>
+			<div class="col col-md-6 col-sm-12 col-xs-12 order-1 order-md-2" style="padding-top: 15%;">
+				<h2 style="text-align: center; color: #505050;">Teste grátis por 7 dias.</h2>
+				<p class="lead" style="text-align: center;">Preencha os campos abaixo para iniciar agora.</p>
+				<div class="form-canvas">
+					<div class="form-offset">
+							<input type="hidden" name="identificador" value="experimente">
+							<div class="form-page lead-data active">
+								<div class="row">
+									<div class="form-group col-md-12">
+										<label for="nomeAssinante" data-toggle="tooltip"
+											data-placement="top" data-html="true" 
+											data-original-title="<p>Campo obrigatório</p>"
+											aria-describedby="tooltip315004">Seu nome: <strong>*</strong></label>
+										<input type="text"
+											class="required form-control" id="nome"
+											aria-describedby="Antonio da Silva" placeholder="Seu nome"
+											required>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-md-6">
+										<label for="email" data-toggle="tooltip" data-placement="top"
+											data-html="true" 
+											data-original-title="<p>Campo obrigatório. Digite o e-mail profissional que usará para acessar sua conta.</p>"
+											>Seu e-mail: <strong>*</strong></label>
+										<input type="email"
+											class="required form-control" id="email"
+											aria-describedby="Seu e-mail" placeholder="Seu e-mail"
+											required>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="leadPhone" data-toggle="tooltip"
+											data-placement="top" data-html="true" 
+											data-original-title="<p>Campo obrigatório. Digite seu número completo com DDD.</p>"
+											aria-describedby="tooltip136744">Seu telefone: <strong>*</strong></label>
+										<input type="text"
+											class="required form-control maskTel" id="telefone"
+											aria-describedby="Seu telefone" placeholder="Seu telefone"
+											required>
+									</div>
+								</div>
+								<button onclick="gerarTeste();" class="btn btn-primary btn-block btn-lg">Iniciar teste gratuitamente</button>
+						</div>
+					</div>
+			</div>
+		</div>
+	</div>
+		<div class="modal fade" id="modalInfo" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Informações usuário de teste</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<center>
+							<p>LOGIN:</p>
+							<p id="login"></p>
+							<p>SENHA:</p>
+							<p id="senha"></p>
+						</center>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Fechar</button>
+					</div>
+				</div>
+			</div>
+		</div></body>
+<script th:inline="javascript">
+
+	$(document).ready(function(){
+		 
+		$("#cpf").inputmask({
+			  mask: ['999.999.999-99', '99.999.999/9999-99'],
+			  keepStatic: true
+		});
+		
+		$("#telefone").inputmask({
+			  mask: ['(99) 9999-9999', '(99) 99999-9999'],
+			  keepStatic: true
+		});
+		
+		$("#email").blur(function() {
+			if(IsEmail(email)==false){
+				$("#email").val("");
+				$("#email").css("border-color", "red");
+				new PNotify({
+		            title: 'Email Inválido!',
+		            text: 'O email digitado não existe ou esta incorreto!',
+		            type : 'error'
+		        });
+	        }else{
+	        	$("#email").css("border-color", "green");
+	        }
+		});
+	});
+
+	function IsEmail(field) {	  
+	  var usuario = field.value.substring(0, field.value.indexOf("@"));
+	  var dominio = field.value.substring(field.value.indexOf("@")+ 1, field.value.length);
+	  if ((usuario.length >=1) &&
+	      (dominio.length >=3) && 
+	      (usuario.search("@")==-1) && 
+	      (dominio.search("@")==-1) &&
+	      (usuario.search(" ")==-1) && 
+	      (dominio.search(" ")==-1) &&
+	      (dominio.search(".")!=-1) &&      
+	      (dominio.indexOf(".") >=1)&& 
+	      (dominio.lastIndexOf(".") < dominio.length - 1)) {
+		  return true;
+	  }
+	  else{
+		  return false;
+	  }
+	}
+	
+	function gerarTeste(){
+		
+		PNotify.prototype.options.styling = "bootstrap3";
+		
+		var plano = sessionStorage.getItem('plano');
+		if(plano == "" || plano == null){
+			plano = "basico";
+		}
+		var nome = $("#nome").val();
+		var cpf = "";
+		var email = $("#email").val();
+		var telefone = $("#telefone").val();
+		
+		if(nome == "" || email == "" || telefone == ""){
+			new PNotify({
+	            title: 'Ação não concluida',
+	            text: 'É necessario preecher todos os campos para continuar!',
+	            type : 'error'
+	        });
+		}else{
+			$.ajax({
+		        type: "POST",
+		        url: '/testeGratis/gerarUsuarioTeste',
+		        data: {
+		        	cpf : cpf,
+		        	email: email,
+		        	nome: nome,
+		        	telefone: telefone,
+		        	plano: plano
+		        },
+		        success: function (data) {
+		        	if(data != ""){
+		        		$("#login").text(email);
+		        		$("#senha").text(data);
+		        		$('#modalInfo').modal("show");
+		        	}else{
+		        		new PNotify({
+				            title: 'Atenção',
+				            text: 'Você já foi utilizou do teste gratuito!',
+				            type : 'error'
+				        });
+		        	}
+		        },
+		        error: function () {
+		            //alert('falhou');
+		        }
+		    });
+		}
+	}
+</script>
+</html>

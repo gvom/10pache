@@ -1,0 +1,180 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script th:src="@{/plugins/webpage/js/scripts.js}"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.css" >
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/css/adminlte.min.css" >
+<link th:href="@{/plugins/webpage/css/styles.css}" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.js" ></script>
+		
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<style>
+		body, html {
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			background: url('../imgs/webpage/download-background.jpg') center center no-repeat;
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-attachment: fixed;
+			overflow-x: hidden;
+		}
+		.user_card {
+			height: 400px;
+			width: 350px;
+			margin-top: auto;
+			margin-bottom: auto;
+			background: #e6eef2;
+			position: relative;
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			padding: 10px;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			border-radius: 50px;;
+
+		}
+		.brand_logo_container {
+			position: absolute;
+			height: 170px;
+			width: 170px;
+			top: -75px;
+			border-radius: 50%;
+			background: linear-gradient(to right, #3b31a1 , #4039ad);;
+			padding: 10px;
+			text-align: center;
+		}
+		.brand_logo {
+			height: 150px;
+			width: 150px;
+			border-radius: 50%;
+			border: 2px solid white;
+		}
+		.form_container {
+			margin-top: 100px;
+		}
+		.login_btn {
+			width: 100%;
+			background: #F79D2E !important;
+			color: white !important;
+		}
+		.login_btn:focus {
+			box-shadow: none !important;
+			outline: 0px !important;
+		}
+		.login_container {
+			padding: 0 2rem;
+		}
+		.input-group-text {
+			background: #F79D2E !important;
+			color: white !important;
+			border: 0 !important;
+			border-radius: 0.25rem 0 0 0.25rem !important;
+		}
+		.input_user,
+		.input_pass:focus {
+			box-shadow: none !important;
+			outline: 0px !important;
+		}
+		.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+			background-color: #0b90c1 !important;
+		}
+		a.back-to-top {
+			background: #f79d2e url("../imgs/webpage/left-arrow.png") no-repeat center 47%;
+		}
+	</style>
+	<head>
+		<meta charset="utf-8"></meta>
+		<title>Login</title>
+		<link rel="icon" th:href="@{/imgs/webpage/favicon.png}">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+	</head>
+    <body>
+    		<a th:href="@{/}" class="back-to-top page-scroll" style="display: inline; left: 0.75rem; top: 0.75rem;">Voltar WebSite</a>
+        	<div class="spinner-wrapper">
+		        <div class="spinner">
+		            <div class="bounce1"></div>
+		            <div class="bounce2"></div>
+		            <div class="bounce3"></div>
+		        </div>
+		    </div>
+            <div class="container h-100">
+				<div class="d-flex justify-content-center h-100">
+					<div class="user_card">
+						<div class="d-flex justify-content-center">
+							<div class="brand_logo_container">
+								<img th:src="@{/imgs/avatar-alt2.png}" class="brand_logo" alt="Logo">
+							</div>
+						</div>
+						<div class="d-flex justify-content-center form_container">
+							<form th:action="@{/verificarlogin}" id="formLogin" method="POST">
+								<div class="input-group mb-3">
+									<div class="input-group-append">
+										<span class="input-group-text"><i class="fas fa-user"></i></span>
+									</div>
+									<input type="text" name="username" id="username" class="form-control input_user" placeholder="Usuário">
+								</div>
+								<div class="input-group mb-2">
+									<div class="input-group-append">
+										<span class="input-group-text"><i class="fas fa-key"></i></span>
+									</div>
+									<input type="password" name="password" class="form-control input_pass" placeholder="Senha" id="password">
+								</div>
+								<div class="form-group">
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="customControlInline">
+										<label class="custom-control-label" for="customControlInline"> Mantenha-me Conectado</label>
+									</div>
+								</div>
+								<div class="d-flex justify-content-center mt-3 login_container">
+									<input type="submit" value="Login" class="btn login_btn"/>
+								</div>
+							</form>
+						</div>
+						
+						<div class="mt-4">
+							<div class="d-flex justify-content-center links">
+								<a href="#" style="color: black;">Esqueci minha senha</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+        
+    </body>
+    <script th:inline="javascript">
+		$(document).ready(function() {
+
+			PNotify.prototype.options.styling = "bootstrap3";
+			var u = window.location.href;
+			var s = u.split("/login");
+			
+			if (s[1] == '?auth=false') {
+				new PNotify({
+					title : 'Login Incorreto!',
+					text : 'Usuário ou senha incorretos.',
+					type : 'error'
+				});
+			}
+			if (s[1] == '?auth=true') {
+				new PNotify({
+					title : 'Login Expirado!',
+					text : 'Conta sendo utilizada no momento em outro dispositivo!',
+					type : 'error'
+				});
+			}
+			
+		});
+
+		
+	</script>
+</html>
+

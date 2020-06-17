@@ -1,0 +1,153 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/layout/layoutPadrao}">
+
+<head>
+
+<meta charset="utf-8"></meta>
+<title>Contato</title>
+
+<style type="text/css">
+.dt-buttons.btn-group {
+	margin-bottom: 15px;
+}
+.msg:hover {
+    -ms-transform: scale(1.05,1.05);
+    -webkit-transform: scale(1.05,1.05);
+    transform: scale(1.05,1.05);
+}
+</style>
+</head>
+<body>
+	<div layout:fragment="conteudo" th:fragment="conteudo">
+
+		<section class="content-header">
+			<h1>
+				Contato <small>Listagem</small>
+			</h1>
+			<ol class="breadcrumb">
+				<li><a th:href="@{/portal}"><i class="fa fa-dashboard"></i>Principal</a></li>
+				<li><a href="#">Contato</a></li>
+				<li class="active">Listagem</li>
+			</ol>
+		</section>
+
+		<!-- Main content -->
+		<section class="content">
+			<!-- Default box -->
+			<div class="row">
+				<div class="col-md-12">
+					<div class="box box-info">
+						<div class="box-header with-border">
+							
+						</div>
+						<div class="box-body" th:fragment="lista" id="lista">
+							<table id="tabelagenerica"
+								class="table table-bordered table-striped table-hover"
+								width="100%">
+								<thead>
+									<tr>
+										<th class="col-md-1">Codigo</th>
+										<th class="col-md-3">Nome</th>
+										<th class="col-md-2">Email</th>
+										<th class="col-md-2">Data</th>
+										<th class="col-md-2">Status</th>
+										<th class="col-md-1">Ação</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="contatos : ${lstContato}" style="cursor: pointer;" class="msg"
+										th:onclick="'visualizar(\'' + ${contatos.contatoId} + '\');'" th:data-mensagem="${contatos.mensagem}" th:id="'tr' + ${contatos.contatoId}">
+										<td th:text="${contatos.contatoId}" class="min-width"></td>
+										<td th:text="${contatos.nome}" class="min-width"></td>
+										<td th:text="${contatos.email}" class="min-width"></td>
+										<td th:text="${#dates.format(contatos.dtMensagem, 'dd/MM/yyyy')}" class="min-width"></td>
+										<td class="min-width">
+											<font th:if="${contatos.lida == true}">Lida</font>
+											<font th:if="${contatos.lida == false}" style="color: blue;" th:id="${contatos.contatoId}">Nova</font></td>
+										<td align="center" style="width: 45px;">
+											<a th:href="@{/contato/remove/}+${contatos.contatoId}">
+												<span class="glyphicon glyphicon-trash text-red"></span>
+											</a>
+										</td>
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr>
+										<th class="col-md-1">Codigo</th>
+										<th class="col-md-3">Nome</th>
+										<th class="col-md-2">Email</th>
+										<th class="col-md-2">Data</th>
+										<th class="col-md-2">Status</th>
+										<th class="col-md-1">Ação</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="modalMensagem" tabindex="-1"
+				role="dialog">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Leitura da mensagem</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<center>
+								<div id="mensagem"></div>
+							</center>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Fechar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<th:block layout:fragment="javascript-extra">
+			<script>
+				$(document).ready(function() {
+					$('table').DataTable({
+						stateSave : true,
+						responsive : true,
+						"bSort" : true,
+						dom : 'Blfrtip',
+						buttons : [ 'csv', 'excel', 'pdf' ]
+					});
+				});
+
+				function visualizar(id) {
+					var mensagem = $("#tr"+id).attr("data-mensagem");
+					if ($("#" + id)) {
+						$.ajax({
+							type : "POST",
+							url : '/contato/confirmarLeitura',
+							data : {
+								id : id
+							},
+							success : function() {
+								$("#" + id).text("Lida");
+								$("#" + id).css("color", "black");
+							},
+							error : function() {
+								//alert('falhou');
+							}
+						});
+					}
+					$("#mensagem").text(mensagem);
+					$('#modalMensagem').modal("show");
+				}
+			</script>
+		</th:block>
+	</div>
+</body>
+</html>

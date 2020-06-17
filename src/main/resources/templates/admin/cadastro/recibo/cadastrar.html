@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/layout/layoutPadrao}">
+
+<head>
+<style>
+.conteudo_01 {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+}
+
+.conteudo_01 li {
+	float: left;
+	width: 220px;
+	height: auto;
+	position: relative;
+	overflow: hidden;
+}
+
+/* Hover */
+.conteudo_01 li:hover .caption {
+	opacity: 1;
+}
+
+.conteudo_01 img {
+	width: 155px;
+	margin: 2px;
+	background: #fff;
+	border: 2px solid #fff;
+	float: left;
+	z-index: 4;
+	margin-left: 10px;
+}
+
+.conteudo_01 .caption {
+	cursor: pointer;
+	position: absolute;
+	opacity: 0;
+	-webkit-transition: all 0.5s ease-in;
+	-moz-transition: all 0.5s ease-in;
+	-o-transition: all 0.5s ease-in;
+	-ms-transition: all 0.5s ease-in;
+	transition: all 0.5s ease-in;
+}
+
+/* efeito blur */
+.conteudo_01 .efeito {
+	width: 200px;
+	height: 30px;
+	border-left: 2px solid #fff;
+	border-right: 2px solid #fff;
+	border-top: 2px solid #fff;
+	z-index: 4;
+	position: absolute;
+}
+
+.conteudo_01 .caption-texto {
+	z-index: 10;
+	color: #FFF;
+	font-size: 18px;
+	position: absolute;
+	width: 200px;
+	height: 30px;
+	text-align: right;
+	top: 2px;
+}
+</style>
+
+<meta charset="utf-8"></meta>
+<title>Recibo</title>
+
+</head>
+
+<body>
+	<div layout:fragment="conteudo" th:fragment="conteudo">
+		<section class="content-header">
+			<h1>
+				Recibo <small>Cadastro</small>
+			</h1>
+			<ol class="breadcrumb">
+				<li><a th:href="@{/portal}"><i class="fa fa-dashboard"></i>Principal</a></li>
+				<li><a href="#">Recibo</a></li>
+				<li class="active">Cadastro</li>
+			</ol>
+		</section>
+
+		<!-- Main content -->
+		<section class="content">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="box box-info">
+						<div class="box-header with-border">
+							<h3 class="box-title">Cadastro de Recibo</h3>
+							<a th:if="${recibo.reciboId >= 1}" class="pull-right btn btn-default" th:href="@{/recibo/imprimir/} + ${recibo.reciboId}"><i class="fa fa-print" aria-hidden="true"></i> Imprimir</a>
+						</div>
+						<div class="box-body">
+							<form id="form" name="form" method="post" th:action="@{/recibo/adicionar}" th:object="${recibo}">
+
+								<input type="hidden" th:field="*{reciboId}" />
+								<input type="hidden" th:field="*{cliente.clienteId}" id="clienteId"/>
+								<input type="hidden" th:field="*{cliente.endereco.idEndereco}" id="idEndereco"/>
+								<input type="hidden" name="paginaAnterior" val="${paginaAnterior}"/>
+								
+								<div class="row">
+									<div class="form-group col-md-4">
+										<label class="control-label" for="nomeCompleto"> Valor do Veículo</label>
+										<input class="form-control" th:field="*{valor}" id="valor" required="true"></input>
+									</div>
+									<div class="form-group col-md-3">
+										<label class="control-label" for="nomeCompleto"> Status do Recibo</label>
+										<select class="form-control" id="status" th:field="*{status}">
+											<option value="0">Cadastrado</option>
+											<option value="1">Em Vistoria</option>
+											<option value="2">Entrada na Delegacia</option>
+											<option value="3">Retirada da Delegacia</option>
+											<option value="4">Entrega ao Cliente</option>
+											<option value="5">Concluído o Processo</option>
+										</select>
+									</div>
+									<div class="form-group col-md-1">
+										<label class="control-label" for="nomeCompleto"> Retirada</label>
+										<input class="form-control" type="number" name="dias" min="0" value="0">
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-md-4">
+										<label class="control-label" for="nomeCompleto"> CPF/CNPJ</label>
+										<input type="text" class="form-control" th:field="*{cliente.cpf}" id="cpf" required="true">
+									</div>
+									<div class="form-group col-md-4">
+										<label class="control-label" for="nomeCompleto"> Identidade</label>
+										<input type="text" class="form-control" th:field="*{cliente.rg}" id="rg" required="true">
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-md-8">
+										<label class="control-label" for="nomeCompleto"> Nome do Adquirinte</label>
+										<input class="form-control" th:field="*{cliente.nome}" id="nome" required="true"></input>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-md-3">
+										<label class="control-label" for="nomeCompleto"> Email</label> 
+										<input type="text" class="form-control" th:field="*{cliente.email}" id="email" required="true">
+									</div>
+									<div class="form-group col-md-3">
+										<label class="control-label" for="nomeCompleto"> Telefone</label>
+										<input type="text" class="form-control" th:field="*{cliente.telefone}" id="telefone" required="true">
+									</div>
+								</div>
+								<div class="row">
+                                	<div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">CEP</label>
+                                        	<input th:field="*{cliente.endereco.cep}" id="cep" class="form-control" required="true">
+                                        </div>
+                                    </div>
+                                	<div class="col-md-5">
+	                                    <div class="form-group">
+	                                        <label for="exampleInputEmail1">Logradouro</label>
+	                                        <input th:field="*{cliente.endereco.logradouro}" maxlength="40" id="rua" class="form-control" required="true">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Número</label>
+                                        	<input type="number" th:field="*{cliente.endereco.numero}" id="numero" maxlength="8" class="form-control" required="true">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Complemento</label>
+                                        	<input th:field="*{cliente.endereco.complemento}" maxlength="40" class="form-control" id="complemento">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Bairro</label>
+                                        	<input th:field="*{cliente.endereco.bairro}" maxlength="40" id="bairro" class="form-control" required="true">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Cidade</label>
+                                        	<input th:field="*{cliente.endereco.cidade}" maxlength="40" id="cidade" class="form-control" required="true">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">UF</label>
+                                        	<input th:field="*{cliente.endereco.estado}" maxlength="2" id="uf" class="form-control" required="true">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Via</label>
+                                        	<input th:field="*{via}" maxlength="40" id="via" class="form-control" >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Cod. Renavem</label>
+                                        	<input th:field="*{renavam}" maxlength="40" id="renavam" class="form-control" >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">RNTRC</label>
+                                        	<input th:field="*{rntrc}" maxlength="40" id="rntrc" class="form-control" >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Nome Anterior</label>
+                                        	<input th:field="*{anterior}" maxlength="40" id="anterior" class="form-control" >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Placa do Veículo</label>
+                                        	<input th:field="*{placa}" maxlength="40" id="placa" class="form-control" >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Chassi</label>
+                                        	<input th:field="*{chassi}" maxlength="40" id="chassi" class="form-control" >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Placa ANT/UF</label>
+                                        	<input th:field="*{antUf}" maxlength="40" id="antUf" class="form-control" >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Combustível</label>
+                                        	<input th:field="*{combustivel}" maxlength="40" id="combustivel" class="form-control" >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Espécie Tipo</label>
+                                        	<input th:field="*{especie}" maxlength="40" id="especie" class="form-control" >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Marca/Modelo</label>
+                                        	<input th:field="*{marca}" maxlength="40" id="marca" class="form-control" >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Ano de Fab</label>
+                                        	<input th:field="*{anoFab}" maxlength="40" id="anoFab" class="form-control" >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Ano de Mod</label>
+                                        	<input th:field="*{anoMod}" maxlength="40" id="anoMod" class="form-control" >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">CAP/POT/CIL</label>
+                                        	<input th:field="*{capPotCil}" maxlength="40" id="capPotCil" class="form-control" >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Categoria</label>
+                                        	<input th:field="*{categoria}" maxlength="40" id="categoria" class="form-control" >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Cor Predominate</label>
+                                        	<input th:field="*{cor}" maxlength="40" id="cor" class="form-control" >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Observação</label>
+                                        	<input th:field="*{observacao}" maxlength="40" id="observacao" class="form-control" >
+                                        </div>
+                                    </div>
+                                </div>
+								<div class="box-footer">
+									<div class="row">
+										<div class="form-group col-md-4">
+											<button type="submit" class="btn btn-primary" id="salvar">Salvar</button>
+											&nbsp; 
+											<a th:if="*{reciboId >= 1}" th:href="@{/recibo/lista}" class="btn btn-default">Voltar</a>
+											<a th:if="*{reciboId < 1}" th:href="@{/recibo/lista}" class="btn btn-default">Cancelar</a>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</section>
+		<th:block layout:fragment="javascript-extra">
+			<script>
+			$(document).ready(function(){
+				 $("#valor").maskMoney({
+					 prefix:'R$ ',
+					 allowNegative: true,
+					 thousands:'.',
+					 decimal:',',
+					 affixesStay: false
+				});
+				$("#cpf").inputmask({
+					  mask: ['999.999.999-99', '99.999.999/9999-99'],
+					  keepStatic: true
+				});
+				$("#rg").inputmask({
+					  mask: ['99.999.999', '[AA]-99.999.999'],
+					  keepStatic: true
+				});
+				$("#telefone").inputmask({
+					  mask: ['(99) 9999-9999', '(99) 99999-9999'],
+					  keepStatic: true
+				});
+				
+				$("#cpf").blur(function() {
+					
+					var cpf = $("#cpf").val();
+					console.log(cpf);
+					
+					$.ajax({
+				        type: "POST",
+				        url: '/recibo/buscarPorCpf',
+				        data: {
+				        	cpf : cpf
+				        },
+				        success: function (data) {
+				        	
+				        	if(data != ""){
+								var reciboJson = JSON.parse(data);
+								
+					        	$("#clienteId").val(reciboJson.clienteId);
+					        	$("#nome").val(reciboJson.nome);
+					        	$("#email").val(reciboJson.email);
+					        	$("#telefone").val(reciboJson.telefone);
+					        	$("#rg").val(reciboJson.rg);
+					        	
+					        	$.ajax({
+							        type: "POST",
+							        url: '/recibo/buscarEndereco',
+							        data: {
+							        	id : parseInt(reciboJson.clienteId)
+							        },
+							        success: function (data) {
+							        	
+							        	if(data != ""){
+											var enderecoJson = JSON.parse(data);
+											
+											$("#idEndereco").val(enderecoJson.idEndereco);
+								        	$("#cep").val(enderecoJson.cep);
+								        	$("#numero").val(enderecoJson.numero);
+								        	$("#complemento").val(enderecoJson.complemento);
+								        	$("#rua").val(enderecoJson.logradouro);
+								        	$("#bairro").val(enderecoJson.bairro);
+								        	$("#cidade").val(enderecoJson.cidade);
+								        	$("#uf").val(enderecoJson.estado);
+								        	$("#pais").val(enderecoJson.pais);
+							        	}
+							        },
+							        error: function () {
+							            //alert('falhou');
+							        }
+							    });
+				        	}
+				        },
+				        error: function () {
+				            //alert('falhou');
+				        }
+				    });
+				});
+								
+				$("#cep").blur(function() {
+					//Nova variável "cep" somente com dígitos.
+					var cep = $(this).val().replace(
+							/\D/g, '');
+
+					//Verifica se campo cep possui valor informado.
+					if (cep != "") {
+
+						//Expressão regular para validar o CEP.
+						var validacep = /^[0-9]{8}$/;
+
+						//Valida o formato do CEP.
+						if (validacep.test(cep)) {
+
+							//Preenche os campos com "..." enquanto consulta webservice.
+							$("#rua").val("...");
+							$("#bairro").val("...");
+							$("#cidade").val("...");
+							$("#uf").val("...");
+
+							//Consulta o webservice viacep.com.br/
+							$.getJSON("//viacep.com.br/ws/"+ cep+ "/json/?callback=?", function(dados) {
+								if (!("erro" in dados)) {
+									//Atualiza os campos com os valores da consulta.
+									$("#rua").val(dados.logradouro);
+									$("#bairro").val(dados.bairro);
+									$("#cidade").val(dados.localidade);
+									$("#uf").val(dados.uf);
+								} //end if.
+								else {
+									//CEP pesquisado não foi encontrado.
+									limpa_formulário_cep();
+									alert("CEP não encontrado.");
+								}
+							});
+						}else {
+							//cep é inválido.
+							limpa_formulário_cep();
+							alert("Formato de CEP inválido.");
+						}
+					} //end if.                                
+				});
+			});
+			</script>
+		</th:block>
+	</div>
+</body>
+</html>

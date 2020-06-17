@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" style="overflow-x: hidden;">
+	
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Mobile app HTML landing page template to help you build a great online presence for your app which will convert visitors into users">
+    <meta name="author" content="Inovatik">
+
+    <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
+	<meta property="og:site_name" content="" /> <!-- website name -->
+	<meta property="og:site" content="" /> <!-- website link -->
+	<meta property="og:title" content=""/> <!-- title shown in the actual shared post -->
+	<meta property="og:description" content="" /> <!-- description shown in the actual shared post -->
+	<meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
+	<meta property="og:url" content="" /> <!-- where do you want your post to link to -->
+	<meta property="og:type" content="article" />
+
+    <!-- Website Title -->
+    <title>10PACHE - Sistema de Despache Automotivo</title>
+    
+    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i" rel="stylesheet">
+    <link th:href="@{/plugins/webpage/css/bootstrap.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" />
+    <link th:href="@{/plugins/webpage/css/swiper.css}" rel="stylesheet">
+	<link th:href="@{/plugins/webpage/css/magnific-popup.css}" rel="stylesheet">
+	<link th:href="@{/plugins/webpage/css/styles.css}" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.css" >
+	
+	<!-- Favicon  -->
+    <link rel="icon" th:href="@{/imgs/webpage/favicon.png}">
+    
+    <style>
+    	@media screen and (max-width: 375px) {
+		    body {
+		        overflow-x: hidden;
+		    }
+		    .counter{
+		    	display: none;
+		    }
+		}
+    	select {
+		    /* you should keep these first rules in place to maintain cross-browser behavior */
+		    -webkit-appearance: none;
+			-moz-appearance: none;
+			-ms-appearance: none;
+		    -o-appearance: none;
+		    appearance: none;
+		    background-image: url('../imgs/webpage/down-arrow.png');
+		    background-position: 96% 50%;
+		    background-repeat: no-repeat;
+		    outline: none;
+		}
+		
+		.header {
+			background: linear-gradient(to bottom right, rgba(72, 72, 212, 0), rgba(241, 104, 104, 0)), url('../imgs/webpage/header-background.jpg') center center no-repeat;
+			background-size: cover;
+		}
+		
+		.basic-1 {
+			padding-top: 6.375rem;
+			padding-bottom: 6.875rem;
+			background: url('../imgs/webpage/video-background.jpg') center center no-repeat;
+			background-size: cover; 
+		}
+		
+		.basic-4 {
+			padding-top: 6.5rem;
+			padding-bottom: 6.75rem;
+			background: url('../imgs/webpage/download-background.jpg') center center no-repeat;
+			background-size: cover; 
+		}
+		
+		.form {
+			padding-top: 6.25rem;
+			padding-bottom: 5.625rem;
+			background: url('../imgs/webpage/contact-background.jpg') center bottom no-repeat;
+			background-size: cover; 
+		}
+		
+		a.back-to-top {
+			position: fixed;
+			z-index: 999;
+			right: 1.3rem;
+			bottom: 0.75rem;
+			display: none;
+			width: 2.625rem;
+			height: 2.625rem;
+			border-radius: 1.875rem;
+			background: #2b369c url("../imgs/webpage/up-arrow.png") no-repeat center 47%;
+			background-size: 1.125rem 1.125rem;
+			text-indent: -9999px;
+		}
+		
+		.planos{
+			margin-bottom: 15px;
+		}
+		
+		.planos:hover {
+		    -ms-transform: scale(1.1,1.1);
+		    -webkit-transform: scale(1.1,1.1);
+		    transform: scale(1.1,1.1);
+		}
+    </style>
+</head>
+<body data-spy="scroll" data-target=".fixed-top">
+    
+    <!-- Preloader -->
+	<div class="spinner-wrapper">
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+    <!-- end of preloader -->
+    
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <!-- Text Logo - Use this if you don't have a graphic logo -->
+        <!-- <a class="navbar-brand logo-text page-scroll" href="index.html">10PACHE</a> -->
+
+        <!-- Image Logo -->
+        <a class="navbar-brand logo-image" href="index.html"><img th:src="@{/imgs/10pache-logo.png}" alt="alternative"></a> 
+        
+        <!-- Mobile Menu Toggle Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-awesome fas fa-bars"></span>
+            <span class="navbar-toggler-awesome fas fa-times"></span>
+        </button>
+        <!-- end of mobile menu toggle button -->
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#header">HOME <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#features">RECURSOS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#preview">PREVIEW</a>
+                </li>
+
+                <!-- Dropdown Menu -->  
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#planos">PLANOS E PREÇOS</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#contact">CONTATO</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="btn-solid-reg page-scroll" href="/login" stlye="margin-top: 2px; padding: 15px 20px 15px 20px;">LOGIN</a>
+                </li>
+            </ul>
+            <span class="nav-item social-icons">
+                <span class="fa-stack">
+                    <a href="#your-link">
+                        <i class="fas fa-circle fa-stack-2x"></i>
+                        <i class="fab fa-facebook-f fa-stack-1x"></i>
+                    </a>
+                </span>
+                <span class="fa-stack">
+                    <a href="#your-link">
+                        <i class="fas fa-circle fa-stack-2x"></i>
+                        <i class="fab fa-twitter fa-stack-1x"></i>
+                    </a>
+                </span>
+            </span>
+        </div>
+    </nav> <!-- end of navbar -->
+    <!-- end of navigation -->
+
+
+    <!-- Header -->
+    <header id="header" class="header">
+        <div class="header-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="text-container">
+                            <h1>SISTEMA <font id="texto">PARA</font> <span id="js-rotating">DESPACHANTE, PARA VOCÊ</span></h1>
+                            <p class="p-large">O 10PACHE é um dos sitemas de automação de despache mais fáceis e completos do mercado. Comece a usar hoje!</p>
+                            <center><a class="btn-solid-lg page-scroll" th:href="@{/testeGratis/novo}" onclick="sessionStorage.setItem('plano', 'basico');" style="overflow: hidden; white-space: nowrap;"> CLIQUE AQUI E COMECE AGORA O TESTE GRATIS</a></center>
+                        </div>
+                    </div> <!-- end of col -->
+                    <div class="col-lg-6">
+                        <div class="image-container">
+                            <img class="img-fluid" th:src="@{/imgs/webpage/telas.png}" style="max-width: 100%; margin-top: 30px;" alt="alternative">
+                        </div> <!-- end of image-container -->
+                    </div> <!-- end of col -->
+                </div> <!-- end of row -->
+            </div> <!-- end of container -->
+        </div> <!-- end of header-content -->
+    </header> <!-- end of header -->
+    <!-- end of header -->
+
+
+    <!-- Testimonials -->
+    <div class="slider-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <!-- Card Slider -->
+                    <div class="slider-container">
+                        <div class="swiper-container card-slider">
+                            <div class="swiper-wrapper">
+                                
+                                <!-- Slide -->
+                                <div class="swiper-slide">
+                                    <div class="card">
+                                        <img class="card-image" th:src="@{/imgs/webpage/testimonial-1.jpg}" alt="alternative">
+                                        <div class="card-body">
+                                            <p class="testimonial-text">Acabei de terminar meu período de teste e fiquei tão impressionado com o suporte e os resultados que comprei o 10PACHE.</p>
+                                            <p class="testimonial-author">Roberto Silva</p>
+                                        </div>
+                                    </div>
+                                </div> <!-- end of swiper-slide -->
+                                <!-- end of slide -->
+        
+                                <!-- Slide -->
+                                <div class="swiper-slide">
+                                    <div class="card">
+                                        <img class="card-image" th:src="@{/imgs/webpage/testimonial-2.jpg}" alt="alternative">
+                                        <div class="card-body">
+                                            <p class="testimonial-text">Não sei como consegui fazer o trabalho sem o 10PACHE. A velocidade deste sistema é incrível!</p>
+                                            <p class="testimonial-author">Thales Rangel</p>
+                                        </div>
+                                    </div>        
+                                </div> <!-- end of swiper-slide -->
+                                <!-- end of slide -->
+        
+                                <!-- Slide -->
+                                <div class="swiper-slide">
+                                    <div class="card">
+                                        <img class="card-image" th:src="@{/imgs/webpage/testimonial-3.jpg}" alt="alternative">
+                                        <div class="card-body">
+                                            <p class="testimonial-text">Este aplicativo tem o potencial de se tornar uma ferramenta obrigatória em todas as operações despachante do dia a dia.</p>
+                                            <p class="testimonial-author">José Carlos</p>
+                                        </div>
+                                    </div>        
+                                </div> <!-- end of swiper-slide -->
+                                <!-- end of slide -->
+        
+                                <!-- Slide -->
+                                <div class="swiper-slide">
+                                    <div class="card">
+                                        <img class="card-image" th:src="@{/imgs/webpage/testimonial-4.jpg}" alt="alternative">
+                                        <div class="card-body">
+                                            <p class="testimonial-text">Procurar um ótimo sistema de despache foi difícil, mas felizmente encontrei o 10PACHE.</p>
+                                            <p class="testimonial-author">Diego Andrade</p>
+                                        </div>
+                                    </div>
+                                </div> <!-- end of swiper-slide -->
+                                <!-- end of slide -->
+        
+                                <!-- Slide -->
+                                <div class="swiper-slide">
+                                    <div class="card">
+                                        <img class="card-image" th:src="@{/imgs/webpage/testimonial-5.jpg}" alt="alternative">
+                                        <div class="card-body">
+                                            <p class="testimonial-text">A equipe de suporte do 10PACHE é incrível. Eles me ajudaram com alguns problemas e sou muito grato a eles.</p>
+                                            <p class="testimonial-author">Silvio Fabriano</p>
+                                        </div>
+                                    </div>        
+                                </div> <!-- end of swiper-slide -->
+                                <!-- end of slide -->
+        
+                                <!-- Slide -->
+                                <div class="swiper-slide">
+                                    <div class="card">
+                                        <img class="card-image" th:src="@{/imgs/webpage/testimonial-6.jpg}" alt="alternative">
+                                        <div class="card-body">
+                                            <p class="testimonial-text">Quem pensaria que o 10PACHE pode fornecer resultados tão surpreendentes em apenas algumas semanas de uso</p>
+                                            <p class="testimonial-author">Lucas Oliveira</p>
+                                        </div>
+                                    </div>        
+                                </div> <!-- end of swiper-slide -->
+                                <!-- end of slide -->
+                            
+                            </div> <!-- end of swiper-wrapper -->
+        
+                            <!-- Add Arrows -->
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                            <!-- end of add arrows -->
+        
+                        </div> <!-- end of swiper-container -->
+                    </div> <!-- end of slider-container -->
+                    <!-- end of card slider -->
+
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of slider-1 -->
+    <!-- end of testimonials -->
+    
+
+    <!-- Features -->
+    <div id="features" class="tabs">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>RECURSOS</h2>
+                    <div class="p-heading p-large">O 10PACHE foi projetado com base nas informações de casos reais de despachantes e evolui todo dia com você, para oferecer a todos o melhor em gerenciamento</div>
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+            <div class="row">
+
+                <!-- Image Pane -->
+                <div class="col-md-4">
+                    <img class="img-fluid" th:src="@{/imgs/webpage/features-iphone-2-alt.png}" style="height: 550px;" alt="alternative">
+                </div>
+                <!-- end of image pane -->
+                
+                <!-- Text And Icon Cards Area -->
+                <div class="col-md-8">
+                    <div class="icon-cards-area">
+                    	<div class="row">
+                    	<div class="col-md-6">
+                            <div class="card" style="display: -webkit-inline-box; margin-bottom: 20px;">
+                                <div class="card-icon" style="margin-right: 20px;">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                </div>
+                                <div class="card-body" style="padding-top: 0px; padding-bottom: 0px; max-width: 75%;">
+                                    <h4 class="card-title">Otimização e Agilidade</h4>
+                                    <p>Torne o trabalho simples e ágil com o auxílio da tecnologia, e tenha tempo para focar no seu negocio.</p>
+                                </div>
+                            </div>
+                            <div class="card" style="display: -webkit-inline-box; margin-bottom: 20px;">
+                                <div class="card-icon" style="margin-right: 20px;">
+                                    <i class="fas fa-cube"></i>
+                                </div>
+                                <div class="card-body" style="padding-top: 0px; padding-bottom: 0px; max-width: 75%;">
+                                    <h4 class="card-title">Gestão facilitada</h4>
+                                    <p>Realize cadastros de clientes e veículos, emita documentos de serviço, além da geração de recibos de entrada de documentos e controle de serviços de veículos, etc..</p>
+                                </div>
+                            </div>
+                            <div class="card" style="display: -webkit-inline-box; margin-bottom: 20px;">
+                                <div class="card-icon" style="margin-right: 20px;">
+                                    <i class="far fa-calendar-check"></i>
+                                </div>
+                                <div class="card-body" style="padding-top: 0px; padding-bottom: 0px; max-width: 75%;">
+                                    <h4 class="card-title">Lembretes de notificações</h4>
+                                    <p>O sistema conta com sistema de notificação, para lembrar quais são processos em andamento em tempo real.</p>
+                                </div>
+                            </div>
+                       	</div>
+                       	<div class="col-md-6">
+                       		<div class="card" style="display: -webkit-inline-box; margin-bottom: 20px;">
+                                <div class="card-icon" style="margin-right: 20px;">
+                                   <i class="fas fa-tablet-alt"></i>
+                                </div>
+                                <div class="card-body" style="padding-top: 0px; padding-bottom: 0px; max-width: 75%;">
+                                    <h4 class="card-title">Mobilidade sem custos adicionais</h4>
+                                    <p>Além de todas as ferramentas que oferecemos para melhorar a gestão da sua empresa, o 10DESPACHE também ajuda na mobilidade do seu negócio. Além de poder acessar os dados de qualquer lugar através da nuvem.</p>
+                                </div>
+                            </div>
+                            <div class="card" style="display: -webkit-inline-box; margin-bottom: 20px;">
+                                <div class="card-icon" style="margin-right: 20px;">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div class="card-body" style="padding-top: 0px; padding-bottom: 0px; max-width: 75%;">
+                                    <h4 class="card-title">Segurança</h4>
+                                    <p>Backup automático, à prova de roubo de informações e o acesso aos seus dados protegido por senha.</p>
+                                </div>
+                            </div>
+                            <div class="card" style="display: -webkit-inline-box; margin-bottom: 20px;">
+                                <div class="card-icon" style="margin-right: 20px;">
+                                    <i class="fas fa-desktop"></i>
+                                </div>
+                                <div class="card-body" style="padding-top: 0px; padding-bottom: 0px; max-width: 75%;">
+                                    <h4 class="card-title">Multiplataforma</h4>
+                                    <p>Tenha acesso ao sistema e aos seus dados de qualquer dispositvo com conexão com internet.</p>
+                                </div>
+                            </div>
+                       	</div>
+                       	</div>
+                    </div> <!-- end of icon cards area -->
+                </div>
+            </div> <!-- end of row -->
+        </div> <!-- end of container --> 
+    </div> <!-- end of tabs -->
+    <!-- end of features -->
+
+
+    <!-- Video -->
+    <div id="preview" class="basic-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>PREVIEW</h2>
+                    <div class="p-heading p-large">Organize e acelere os processos do seu negócio com a ajuda da tecnologia com o 10PACHE</div>
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <!-- Video Preview -->
+                    <div class="image-container">
+                        <div class="video-wrapper">
+                            <a class="popup-youtube" href="https://www.youtube.com/watch?v=fLCjQJCekTs" data-effect="fadeIn">
+                                <img class="img-fluid" th:src="@{/imgs/webpage/video-frame.jpg}" alt="alternative">
+                                <span class="video-play-button">
+                                    <span></span>
+                                </span>
+                            </a>
+                        </div> <!-- end of video-wrapper -->
+                    </div> <!-- end of image-container -->
+                    <!-- end of video preview -->
+
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of basic-1 -->
+    <!-- end of video -->
+
+
+
+    <!-- Details Lightboxes -->
+	<!-- Lightbox -->
+	<div id="details-lightbox-1" class="lightbox-basic zoom-anim-dialog mfp-hide">
+		<div class="row">
+			<button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
+			<div class="col-lg-6">
+				<img class="img-fluid" th:src="@{/imgs/webpage/details-lightbox-1.png}" alt="alternative">
+			</div>
+			<div class="col-lg-6">
+				<h3>Goals Setting</h3>
+				<hr>
+                <p>10PACHE can easily help you track your personal development evolution if you take the time to set it up.</p>
+                <h4>User Feedback</h4>
+                <p>This is a great app which can help you save time and make your live easier. And it will help improve your productivity levels.</p>
+                <p>You should definitely give it a try when you need a good app.</p>
+				<table>
+					<tr><td class="icon-cell"><i class="fas fa-desktop"></i></td><td>Responsive layout</td></tr>
+					<tr><td class="icon-cell"><i class="fas fa-bullhorn"></i></td><td>Distinctive CTAs</td></tr>
+					<tr><td class="icon-cell"><i class="fas fa-image"></i></td><td>Image gallery slider</td></tr>
+					<tr><td class="icon-cell"><i class="fas fa-envelope"></i></td><td>Contact forms</td></tr>
+					<tr><td class="icon-cell"><i class="fab fa-font-awesome-flag"></i></td><td>FontAwesome icons</td></tr>
+					<tr><td class="icon-cell"><i class="fas fa-code"></i></td><td>Well-structured code</td></tr>
+				</table>
+				<a class="btn-solid-reg" href="#your-link">DETAILS</a> <a class="btn-outline-reg mfp-close as-button" href="#details">BACK</a> 
+			</div>
+		</div> <!-- end of row -->
+    </div> <!-- end of lightbox-basic -->
+    <!-- end of lightbox -->
+    
+    <!-- Lightbox -->
+    <div id="details-lightbox-2" class="lightbox-basic zoom-anim-dialog mfp-hide">
+		<div class="row">
+			<button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
+			<div class="col-lg-6">
+				<img class="img-fluid" th:src="@{/imgs/webpage/details-lightbox-2.png}" alt="alternative">
+			</div>
+			<div class="col-lg-6">
+				<h3>Calendar Input</h3>
+				<hr>
+                <p>The calendar input function enables the user to setup training, meditation and relaxation sessions with ease.</p>
+                <h4>User Feedback</h4>
+                <p>This is a great app which can help you save time and make your live easier. And it will help improve your productivity levels.</p>
+                <p>You should definitely give it a try when you need a good app.</p>
+				<table>
+					<tr><td class="icon-cell"><i class="fas fa-desktop"></i></td><td>Responsive layout</td></tr>
+					<tr><td class="icon-cell"><i class="fas fa-bullhorn"></i></td><td>Distinctive CTAs</td></tr>
+					<tr><td class="icon-cell"><i class="fas fa-image"></i></td><td>Image gallery slider</td></tr>
+					<tr><td class="icon-cell"><i class="fas fa-envelope"></i></td><td>Contact forms</td></tr>
+					<tr><td class="icon-cell"><i class="fab fa-font-awesome-flag"></i></td><td>FontAwesome icons</td></tr>
+					<tr><td class="icon-cell"><i class="fas fa-code"></i></td><td>Well-structured code</td></tr>
+				</table>
+				<a class="btn-solid-reg" href="#your-link">DETAILS</a> <a class="btn-outline-reg mfp-close as-button" href="#details">BACK</a>
+			</div>
+		</div> <!-- end of row -->
+    </div> <!-- end of lightbox-basic -->
+    <!-- end of lightbox -->
+    <!-- end of details lightboxes -->
+
+
+    <!-- Screenshots -->
+    <div class="slider-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    
+                    <!-- Image Slider -->
+                    <div class="slider-container">
+                        <div class="swiper-container image-slider">
+                            <div class="swiper-wrapper">
+                                
+                                <!-- Slide -->
+                                <div class="swiper-slide">
+                                    <a th:href="@{/imgs/webpage/screenshot-1.png}" class="popup-link" data-effect="fadeIn">
+                                        <img class="img-fluid" th:src="@{/imgs/webpage/screenshot-1.png}" alt="alternative">
+                                    </a>
+                                </div>
+                                <!-- end of slide -->
+                                
+                                <!-- Slide -->
+                                <div class="swiper-slide">
+                                    <a th:href="@{/imgs/webpage/tela2.png}" class="popup-link" data-effect="fadeIn">
+                                        <img class="img-fluid" th:src="@{/imgs/webpage/tela2.png}" alt="alternative">
+                                    </a>
+                                </div>
+                                <!-- end of slide -->
+
+                                <!-- Slide -->
+                                <div class="swiper-slide">
+                                    <a th:href="@{/imgs/webpage/features-iphone-2-alt.png}" class="popup-link" data-effect="fadeIn">
+                                        <img class="img-fluid" th:src="@{/imgs/webpage/features-iphone-2-alt.png}" alt="alternative">
+                                    </a>
+                                </div>
+                                <!-- end of slide -->
+
+                                <!-- Slide -->
+                                <div class="swiper-slide">
+                                    <a th:href="@{/imgs/webpage/tela3.png}" class="popup-link" data-effect="fadeIn">
+                                        <img class="img-fluid" th:src="@{/imgs/webpage/tela3.png}" alt="alternative">
+                                    </a>
+                                </div>
+                                <!-- end of slide -->
+
+                                
+                                
+                            </div> <!-- end of swiper-wrapper -->
+
+                            <!-- Add Arrows -->
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                            <!-- end of add arrows -->
+
+                        </div> <!-- end of swiper-container -->
+                    </div> <!-- end of slider-container -->
+                    <!-- end of image slider -->
+
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of slider-2 -->
+    <!-- end of screenshots -->
+
+
+    <!-- Statistics -->
+    <div class="counter">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    
+                    <!-- Counter -->
+                    <div id="counter">
+                        <div class="cell">
+                            <div class="counter-value number-count" data-count="231">1</div>
+                            <p class="counter-info">Usuários Felizes</p>
+                        </div>
+                        <div class="cell">
+                            <div class="counter-value number-count" data-count="85">1</div>
+                            <p class="counter-info">Problemas Resolvidos</p>
+                        </div>
+                        <div class="cell">
+                            <div class="counter-value number-count" data-count="59">1</div>
+                            <p class="counter-info">Boas Avaliações</p>
+                        </div>
+                        <div class="cell">
+                            <div class="counter-value number-count" data-count="127">1</div>
+                            <p class="counter-info">Casos de Estudo</p>
+                        </div>
+                    </div>
+                    <!-- end of counter -->
+                    
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of counter -->
+    <!-- end of statistics -->
+    
+    <!-- Download -->
+    <div class="basic-4" id="planos">
+    	<div class="row">
+            <div class="col-lg-12">
+                <center><h2>PLANOS E PREÇOS</h2></center>
+                <div class="p-heading p-large">Confira o plano que melhor cabe no seu bolso!</div>
+            </div> <!-- end of col -->
+        </div>
+	    <div class="row" style="margin-right: 30px; margin-left: 30px;">
+	        <div class="col-lg-4">
+	        	<center>
+					<a th:href="@{/testeGratis/novo}" onclick="sessionStorage.setItem('plano', 'basico');"><img class="img-fluid planos" th:src="@{/imgs/webpage/basico.png}" alt="plano" style="max-width: 70%;"></a>
+	        	</center>
+	        </div>
+	        <div class="col-lg-4">
+	        	<center>
+					<a th:href="@{/testeGratis/novo}" onclick="sessionStorage.setItem('plano', 'padrão');"><img class="img-fluid planos" th:src="@{/imgs/webpage/padrao.png}" alt="plano" style="max-width: 70%;"></a>
+	       		</center>
+	        </div>
+	        <div class="col-lg-4">
+	        	<center>
+					<a th:href="@{/testeGratis/novo}" onclick="sessionStorage.setItem('plano', 'premium');"><img class="img-fluid planos" th:src="@{/imgs/webpage/premium.png}" alt="plano" style="max-width: 70%;"></a>
+	        	</center>
+	        </div>
+	    </div>
+    </div> <!-- end of basic-4 -->
+    <!-- end of download -->
+    
+    
+    <!-- Contact -->
+    <div id="contact" class="form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>CONTATO</h2>
+                    <ul class="list-unstyled li-space-lg">
+                        <li class="address">Não hesite em nos ligar ou apenas use o formulário de contato abaixo</li><!--
+                        <li><i class="fas fa-map-marker-alt"></i>22 Innovative, San Francisco, CA 94043, US</li>
+                        <li><i class="fas fa-phone"></i><a class="blue" href="tel:003024630820">+81 720 2212</a></li>
+                        <li><i class="fas fa-envelope"></i><a class="blue" href="mailto:office@leno.com">office@leno.com</a></li> -->
+                    </ul>
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    
+                    <!-- Contact Form -->
+                    <form id="formContato" action="#">
+                        <div class="form-group">
+                            <input type="text" class="form-control-input" id="cname" name="nome" required>
+                            <label class="label-control" for="cname">Nome</label>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control-input" id="cemail" name="email" required>
+                            <label class="label-control" for="cemail">Email</label>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control-textarea" id="cmessage" name="mensagem" required></textarea>
+                            <label class="label-control" for="cmessage">Sua menssagem</label>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group checkbox">
+                            <input type="checkbox" id="cterms" value="Agreed-to-Terms" required>Eu li e aceito às condições declaradas de 10PACHE em <a href="#">Política de Privacidade</a> e <a href="#">Termos e Condições</a> 
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" onclick="SubForm();" class="form-control-submit-button">ENVIAR MENSSAGEM</button>
+                        </div>
+                        <div class="form-message">
+                            <div id="cmsgSubmit" class="h3 text-center hidden"></div>
+                        </div>
+                    </form>
+                    <!-- end of contact form -->
+
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of form -->
+    <!-- end of contact -->
+
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="footer-col">
+                        <h4>Sobre 10PACHE</h4>
+                        <p>Nosso principal campo de atuação está direcionado a suprir as necessidades envolventes ao gerenciamento de escritório de Despachante Documentista de forma digital.</p>
+                    </div>
+                </div> <!-- end of col -->
+                <div class="col-md-4">
+                    <div class="footer-col middle">
+                        <h4>Links Importantes</h4>
+                        <ul class="list-unstyled li-space-lg">
+                            <li class="media">
+                                <i class="fas fa-square"></i>
+                                <div class="media-body">Nossos parceiros <a class="turquoise" href="#">startupend.net</a></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div> <!-- end of col -->
+                <div class="col-md-4">
+                    <div class="footer-col last">
+                        <h4>Redes Sociais</h4>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-facebook-f fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-instagram fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin-in fa-stack-1x"></i>
+                            </a>
+                        </span>
+                    </div> 
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of footer -->  
+    <!-- end of footer -->
+
+
+    <!-- Copyright -->
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p class="p-small"></p>
+                </div> <!-- end of col -->
+            </div> <!-- enf of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of copyright --> 
+    <!-- end of copyright -->
+    
+    	
+    <!-- Scripts -->
+    <script th:src="@{/plugins/webpage/js/jquery.min.js}"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
+    <script th:src="@{/plugins/webpage/js/popper.min.js}"></script> <!-- Popper tooltip library for Bootstrap -->
+    <script th:src="@{/plugins/webpage/js/bootstrap.min.js}"></script> <!-- Bootstrap framework -->
+    <script th:src="@{/plugins/webpage/js/jquery.easing.min.js}"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
+    <script th:src="@{/plugins/webpage/js/swiper.min.js}"></script> <!-- Swiper for image and text sliders -->
+    <script th:src="@{/plugins/webpage/js/jquery.magnific-popup.js}"></script> <!-- Magnific Popup for lightboxes -->
+    <script th:src="@{/plugins/webpage/js/morphext.min.js}"></script> <!-- Morphtext rotating text in the header -->
+    <script th:src="@{/plugins/webpage/js/validator.min.js}"></script> <!-- Validator.js - Bootstrap plugin that validates forms -->
+    <script th:src="@{/plugins/webpage/js/scripts.js}"></script> <!-- Custom scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.2.1/pnotify.js" ></script>
+</body>
+<script>
+function SubForm(){
+	
+	PNotify.prototype.options.styling = "bootstrap3";
+	
+	var nome = $("#cname").val();
+	var email = $("#email").val();
+	var mensagem = $("#mensagem").val();
+	var terms = $("#cterms").prop("checked"); 
+	
+	if(nome != "" && email != "" && mensagem != "" && terms == true){
+		$.ajax({
+	        url:'/testeGratis/adicionarContato',
+	        type:'post',
+	        data: $('#formContato').serialize(),
+	        success:function(){
+	        	new PNotify({
+					title : 'Sucesso!',
+					text : 'Mensagem enviada com sucesso!',
+					type : 'sucess'
+				});
+	        	$("#cname").val("");
+	        	$("#email").val("");
+	        	$("#mensagem").val("");
+	        	$("#cterms").prop("checked", false);
+	        }
+	    });
+	}else{
+		new PNotify({
+			title : 'Atenção!',
+			text : 'É necessario preencher todos os campos e concordar com os termos para prosseguir!',
+			type : 'error'
+		});
+	}
+}
+</script>
+</html>

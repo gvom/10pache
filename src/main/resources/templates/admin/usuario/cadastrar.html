@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/layout/layoutPadrao}">
+
+<head>
+<style>
+.conteudo_01 {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+}
+
+.conteudo_01 li {
+	float: left;
+	width: 220px;
+	height: auto;
+	position: relative;
+	overflow: hidden;
+}
+
+/* Hover */
+.conteudo_01 li:hover .caption {
+	opacity: 1;
+}
+
+.conteudo_01 img {
+	width: 155px;
+	margin: 2px;
+	background: #fff;
+	border: 2px solid #fff;
+	float: left;
+	z-index: 4;
+	margin-left: 10px;
+}
+
+.conteudo_01 .caption {
+	cursor: pointer;
+	position: absolute;
+	opacity: 0;
+	-webkit-transition: all 0.5s ease-in;
+	-moz-transition: all 0.5s ease-in;
+	-o-transition: all 0.5s ease-in;
+	-ms-transition: all 0.5s ease-in;
+	transition: all 0.5s ease-in;
+}
+
+/* efeito blur */
+.conteudo_01 .efeito {
+	width: 200px;
+	height: 30px;
+	border-left: 2px solid #fff;
+	border-right: 2px solid #fff;
+	border-top: 2px solid #fff;
+	z-index: 4;
+	position: absolute;
+}
+
+.conteudo_01 .caption-texto {
+	z-index: 10;
+	color: #FFF;
+	font-size: 18px;
+	position: absolute;
+	width: 200px;
+	height: 30px;
+	text-align: right;
+	top: 2px;
+}
+</style>
+
+<meta charset="utf-8"></meta>
+<title>Usuario</title>
+
+</head>
+
+<body>
+	<div layout:fragment="conteudo" th:fragment="conteudo">
+		<section class="content-header">
+			<h1>
+				Usuario <small>Cadastro</small>
+			</h1>
+			<ol class="breadcrumb">
+				<li><a th:href="@{/portal}"><i class="fa fa-dashboard"></i>Principal</a></li>
+				<li><a href="#">Usuario</a></li>
+				<li class="active">Cadastro</li>
+			</ol>
+		</section>
+
+		<!-- Main content -->
+		<section class="content">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="box box-info">
+						<div class="box-header with-border">
+							<h3 class="box-title">Cadastro de Usuario</h3>
+						</div>
+						<div class="box-body">
+							<form id="form" name="form" method="post" th:action="@{/usuario/adicionar}" th:object="${usuario}">
+
+								<input type="hidden" th:field="*{usuarioId}" />
+								<div class="row">
+									<div class="form-group col-md-6">
+										<label class="control-label" for="nomeCompleto"> Nome</label>
+										<input class="form-control" th:field="*{nome}" id="nome" required="true"></input>
+									</div>
+
+								</div>
+								<div class="row">
+									<div class="form-group col-md-3">
+										<label class="control-label" for="nomeCompleto"> Tipo de Usuario</label> 
+										<select class="form-control" th:field="*{tipoUsuario}" id="tipoUsuario">
+											<option value="0">Administrador</option>
+											<option value="1">Usuario Comum</option>
+										</select>
+									</div>
+									<div class="form-group col-md-3">
+										<label class="control-label" for="nomeCompleto"> Status</label>
+										<select class="form-control" th:field="*{status}" id="status">
+											<option value="0">Ativo</option>
+											<option value="1">Inativo</option>
+										</select>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-md-3">
+										<label class="control-label" for="nomeCompleto"> Username</label> 
+										<input type="text" autofocus class="form-control" th:field="*{login}" id="login" required="true" autocomplete="off" onchange="verificarLogin();">
+									</div>
+									<div class="form-group col-md-3">
+										<label class="control-label" for="nomeCompleto"> Senha</label>
+										<input type="password" autofocus class="form-control" th:field="*{senha}" id="senha" autocomplete="off" placeholder="*****" th:tabindex="${usuario.senha == '' ? '0' : '-1'}">
+									</div>
+								</div>
+								<div class="row">
+                                	<div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">CEP</label>
+                                        	<input th:field="*{endereco.cep}" id="cep" class="form-control">
+                                        </div>
+                                    </div>
+                                	<div class="col-md-5">
+	                                    <div class="form-group">
+	                                        <label for="exampleInputEmail1">Logradouro</label>
+	                                        <input th:field="*{endereco.logradouro}" maxlength="40" id="rua" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Número</label>
+                                        	<input type="number" th:field="*{endereco.numero}" maxlength="8" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Complemento</label>
+                                        	<input th:field="*{endereco.complemento}" maxlength="40" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Bairro</label>
+                                        	<input th:field="*{endereco.bairro}" maxlength="40" id="bairro" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Cidade</label>
+                                        	<input th:field="*{endereco.cidade}" maxlength="40" id="cidade" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">UF</label>
+                                        	<input th:field="*{endereco.estado}" maxlength="2" id="uf" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+								<div class="box-footer">
+									<div class="row">
+										<div class="form-group col-md-4">
+											<button type="submit" class="btn btn-primary" id="salvar">Salvar</button>
+											&nbsp; 
+											<a th:href="@{/usuario/lista}" class="btn btn-default menu-link">Cancelar</a>
+										</div>
+									</div>
+								</div>
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</section>
+		<th:block layout:fragment="javascript-extra">
+			<script>
+			$(document).ready(function(){	
+				$("#cep").blur(function() {
+					//Nova variável "cep" somente com dígitos.
+					var cep = $(this).val().replace(
+							/\D/g, '');
+
+					//Verifica se campo cep possui valor informado.
+					if (cep != "") {
+
+						//Expressão regular para validar o CEP.
+						var validacep = /^[0-9]{8}$/;
+
+						//Valida o formato do CEP.
+						if (validacep.test(cep)) {
+
+							//Preenche os campos com "..." enquanto consulta webservice.
+							$("#rua").val("...");
+							$("#bairro").val("...");
+							$("#cidade").val("...");
+							$("#uf").val("...");
+
+							//Consulta o webservice viacep.com.br/
+							$.getJSON("//viacep.com.br/ws/"+ cep+ "/json/?callback=?", function(dados) {
+								if (!("erro" in dados)) {
+									//Atualiza os campos com os valores da consulta.
+									$("#rua").val(dados.logradouro);
+									$("#bairro").val(dados.bairro);
+									$("#cidade").val(dados.localidade);
+									$("#uf").val(dados.uf);
+								} //end if.
+								else {
+									//CEP pesquisado não foi encontrado.
+									limpa_formulário_cep();
+									alert("CEP não encontrado.");
+								}
+							});
+						}else {
+							//cep é inválido.
+							limpa_formulário_cep();
+							alert("Formato de CEP inválido.");
+						}
+					} //end if.                                
+				});
+			});
+			
+			function verificarLogin(){
+				
+				var login = $("#login").val();
+				
+				$.ajax({
+			        type: "POST",
+			        url: '/usuario/verificaLogin',
+			        data: {
+			        	login : login
+			        },
+			        success: function (data) {
+			        	if(data == "true"){
+			        		$("#login").val("");
+			        		$("#login").css("border-color", "red");
+			        		alert("Login já cadastrado!");
+			        	}else{
+			        		$("#login").css("border-color", "green");
+			        	}
+			        },
+			        error: function () {
+			            //alert('falhou');
+			        }
+			    });
+			}
+			</script>
+		</th:block>
+	</div>
+</body>
+</html>

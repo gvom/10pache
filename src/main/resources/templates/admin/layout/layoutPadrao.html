@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="utf-8"></meta>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="apple-touch-icon" sizes="57x57"
+	th:href="@{/fav/icon-72x72.png}">
+<link rel="apple-touch-icon" sizes="60x60"
+	th:href="@{/fav/icon-72x72.png}">
+<link rel="apple-touch-icon" sizes="72x72"
+	th:href="@{/fav/icon-72x72.png}">
+<link rel="apple-touch-icon" sizes="76x76"
+	th:href="@{/fav/icon-72x72.png}">
+<link rel="apple-touch-icon" sizes="114x114"
+	th:href="@{/fav/icon-72x72.png}">
+<link rel="apple-touch-icon" sizes="120x120"
+	th:href="@{/fav/icon-72x72.png}">
+<link rel="apple-touch-icon" sizes="144x144"
+	th:href="@{/fav/icon-72x72.png}">
+<link rel="apple-touch-icon" sizes="152x152"
+	th:href="@{/fav/icon-72x72.png}">
+<link rel="apple-touch-icon" sizes="180x180"
+	th:href="@{/fav/icon-72x72.png}">
+<link rel="icon" type="image/png" sizes="192x192"
+	th:href="@{/fav/icon-72x72.png}">
+<link rel="icon" type="image/png" sizes="32x32"
+	th:href="@{/fav/icon-72x72.png}">
+<link rel="icon" type="image/png" sizes="96x96"
+	th:href="@{/fav/icon-72x72.png}">
+<link rel="icon" type="image/png" sizes="16x16"
+	th:href="@{/fav/icon-72x72.png}">
+<link rel="manifest" th:href="@{/fav/manifest.json}">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="@{/fav/icon-72x72.png}">
+<meta name="theme-color" content="#ffffff">
+<title>10PACHE</title>
+<!-- Tell the browser to be responsive to screen width -->
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport">
+<!-- Bootstrap 3.3.6 -->
+<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}">
+<!-- Font Awesome -->
+<link rel="stylesheet" th:href="@{/font-awesome/css/font-awesome.css}">
+<!-- Ionicons -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" th:href="@{/plugins/select2/select2.min.css}">
+
+<link rel="stylesheet" th:href="@{/dist/css/AdminLTE.min.css}">
+<link rel="stylesheet"
+	th:href="@{/plugins/datatables/dataTables.bootstrap.css}">
+<link rel="stylesheet"
+	th:href="@{/plugins/datatables/extensions/Responsive/css/dataTables.responsive.css}">
+
+<link rel="stylesheet"
+	th:href="@{/plugins/datepicker/css/bootstrap-datepicker3.css}">
+<link rel="stylesheet"
+	th:href="@{/plugins/timepicker/bootstrap-timepicker.min.css}">
+<link rel="stylesheet"
+	th:href="@{/plugins/pnotify/pnotify.custom.min.css}">
+<link rel="stylesheet" th:href="@{/plugins/fancybox/fancybox.css}">
+<link rel="stylesheet"
+	th:href="@{/plugins/bootstrap-switch/bootstrap-switch.css}">
+<link rel="stylesheet" th:href="@{/plugins/iCheck/all.css}">
+<link rel="stylesheet"
+	th:href="@{/plugins/colorpicker/dist/css/bootstrap-colorpicker.min.css}">
+
+<link rel="stylesheet" th:href="@{/dist/css/skins/_all-skins.min.css}">
+<link rel="stylesheet" th:href="@{/plugins/strength/strength.css}">
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.bootstrap.min.css">
+
+<link rel="icon" th:href="@{/imgs/webpage/favicon.png}">
+
+<script th:src="@{/plugins/jQuery/jquery-2.2.3.min.js}"></script>
+
+<style>
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+body {
+	font-family: 'Muli', sans-serif; 
+}
+
+.recibos-container{
+	margin-bottom: 10px;
+}
+
+.recibo {
+	border-radius: 10px;
+	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+	display: flex;
+	max-width: 100%;
+	overflow: hidden;
+	width: 100%;
+}
+
+.recibo h4 {
+	margin: 0;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+}
+
+.recibo h2 {
+	letter-spacing: 1px;
+	margin: 10px 0;
+}
+
+.recibo-preview {
+	background-color: #2B369C;
+	color: #fff;
+	padding: 30px;
+	width: 226px;
+	height: 130px;
+}
+
+.recibo-preview a {
+	color: #fff;
+	display: inline-block;
+	font-size: 12px;
+	opacity: 0.6;
+	margin-top: 30px;
+	text-decoration: none;
+}
+
+.recibo-info {
+	padding: 10px;
+	position: relative;
+	width: 100%;
+	background-color: #e8e5e5;
+	overflow: hidden;
+    height: 130px;
+}
+
+.btnRec {
+	background-color: #2B369C;
+	border: 0;
+	border-radius: 50px;
+	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+	color: #fff;
+	position: absolute;
+	bottom: 90px;
+	right: 2px;
+}
+
+.gifcenter {
+	position: absolute;
+	left: 50%;
+	top: 50%
+}
+.box.box-info {
+    border-top-color: #2b369c !important;
+}
+.skin-blue .main-header .navbar .sidebar-toggle:hover {
+    background-color: #192594;
+}
+
+.btn-primary {
+    background-color: #2b369c !important;
+    border-color: #2b369c !important;
+}
+</style>
+</head>
+<body
+	class="hold-transition skin-blue fixed sidebar-mini sidebar-collapse">
+	<!-- Site wrapper -->
+	<div class="wrapper">
+		<div th:replace="admin/layout/fragments/cabecalho :: cabecalho"></div>
+
+		<div th:replace="admin/layout/fragments/sidebar :: sidebar"></div>
+
+		<div class="content-wrapper">
+			<div id="aguarde" style="display: none; z-index: 9999;"
+				class="gifcenter">
+				<img th:src="@{/imgs/ajax-loader.gif}" height="100px;"
+					width="100px;" />
+			</div>
+			<div layout:fragment="conteudo" layout:th="conteudo" id="conteudo"></div>
+		</div>
+
+		<div th:replace="admin/layout/fragments/alterarSenha :: alterarSenha"></div>
+		<div th:replace="admin/layout/fragments/exclusao :: exclusao"></div>
+		<footer class="main-footer">
+			<center><img th:src="@{/imgs/10pache-logo.png}" alt="Logo" style="height: 35px;"></center>
+		</footer>
+	</div>
+	<!-- Bootstrap 3.3.6 -->
+	<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+	<script th:src="@{/plugins/select2/select2.full.min.js}"></script>
+	<!-- SlimScroll -->
+	<script th:src="@{/plugins/slimScroll/jquery.slimscroll.min.js}"></script>
+	<!-- FastClick -->
+	<script th:src="@{/plugins/fastclick/fastclick.js}"></script>
+	<!-- AdminLTE App -->
+	<script th:src="@{/dist/js/app.min.js}"></script>
+	<script th:src="@{/plugins/datatables/jquery.dataTables.min.js}"></script>
+	<script th:src="@{/plugins/datatables/dataTables.bootstrap.min.js}"></script>
+	<script
+		th:src="@{/plugins/datatables/extensions/Responsive/js/dataTables.responsive.js}"></script>
+	<!-- SlimScroll -->
+	<script th:src="@{/plugins/slimScroll/jquery.slimscroll.min.js}"></script>
+	<script th:src="@{/plugins/datepicker/js/bootstrap-datepicker.js}"></script>
+	<script
+		th:src="@{/plugins/datepicker/locales/bootstrap-datepicker.pt-BR.min.js}"></script>
+	<script th:src="@{/plugins/input-mask/jquery.inputmask.js}"></script>
+	<script th:src="@{/plugins/ckeditor/ckeditor.js}"></script>
+	<script th:src="@{/js/jquery.countdown.min.js}"></script>
+	<script th:src="@{/plugins/blockui/blockui.js}"></script>
+	<script th:src="@{/plugins/maskmoney/maskmoney.js}"></script>
+	<script th:src="@{/plugins/inputmasked/jquery-mask.js}"></script>
+	<script th:src="@{/plugins/pnotify/pnotify.custom.min.js}"></script>
+	<script th:src="@{/plugins/fancybox/fancybox.js}"></script>
+	<script th:src="@{/plugins/dropzone/dropzone.js}"></script>
+	<script th:src="@{/js/util.js}"></script>
+	<script th:src="@{/plugins/bootstrap-switch/bootstrap-switch.js}"></script>
+	<script th:src="@{/plugins/iCheck/icheck.min.js}"></script>
+	<script th:src="@{/plugins/chartjs/Chart.min.js}"></script>
+	<script th:src="@{/plugins/strength/strength.js}"></script>
+	<script th:src="@{/plugins/timepicker/bootstrap-timepicker.js}"></script>
+	<script
+		th:src="@{/plugins/colorpicker/dist/js/bootstrap-colorpicker.min.js}"></script>
+
+	<script
+		src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+	<script
+		src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
+
+
+	<th:block layout:fragment="javascript-extra"></th:block>
+
+	<script>
+		function verificaSenhaConfirmacao() {
+			var senhaAntiga = $("#senhaAntiga").val();
+			
+			$.ajax({
+	            url: "/usuario/confSn",
+	            type: "POST",
+	            data: {
+	                sn: senhaAntiga
+	            },
+	            success: function (data) {
+	               if(data == "true"){
+	            		var senha = $("#novaSenha").val();
+		       			var confirme = $("#confirme").val();
+	
+		       			if (senha == confirme) {
+		       				$('#formAlterarSenha').submit();
+		       			} else {
+		       				new PNotify({
+		       					title : 'Atenção!',
+		       					text : "A senha de confirmação está incorreta!",
+		       					delay : 6000
+		       				});
+		       			}
+	               }else{
+	            	   new PNotify({
+	       					title : 'Atenção!',
+	       					text : "A senha atual está incorreta!",
+	       					delay : 6000
+	       				}); 
+	               }
+	            },
+	            error: function () {
+	                alert('Falha ao conferir senha atual!');
+	            }
+	        });
+		}
+
+		function alterarSenhaDigitalAC() {
+			var $myForm = $('#formAlterarSenha');
+			if ($myForm[0].checkValidity()) {
+				verificaSenhaConfirmacao();
+			} else {
+				new PNotify({
+					title : 'Informações invalidas!',
+					text : "Preenchas todos os campos para continuar!",
+					delay : 6000
+				});
+			}
+		}
+
+		$(window).on("popstate", function() {
+			$("#conteudo").html('');
+			$("#aguarde").show();
+
+			var link = window.location.href;
+			$("#conteudo").load(link + "/conteudo", function() {
+				$("#aguarde").hide();
+			});
+		});
+		$('.menu-link').on('click', function(event) {
+			$("#conteudo").html('');
+			$("#aguarde").show();
+			event.preventDefault();
+			$("#conteudo").load(this.href + "/conteudo", function() {
+				$("#aguarde").hide();
+			});
+			window.history.pushState("", "Digital AC", this.href);
+		});
+
+		$( document ).ready(function() {
+		    history.pushState(null, null, location.href);
+			window.onpopstate = function() {
+				history.go(1);
+			};
+			if ($(".hora") != null) {
+				$(".hora").inputmask("99:99");
+			}
+		});
+		
+	
+	</script>
+
+</body>
+</html>
