@@ -83,6 +83,23 @@
 <style>
 @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
 
+.sidebar-menu>li>a>.fa, .sidebar-menu>li>a>.glyphicon, .sidebar-menu>li>a>.ion {
+    font-size: 2em;
+    line-height: 0.75em;
+    margin-right: 15px;
+}
+
+.sidebar-mini.sidebar-collapse .sidebar-menu>li>a{
+	padding-left: 10px;
+    padding-right: 10px;
+}
+
+@media (min-width: 768px){
+	.sidebar-mini.sidebar-collapse .sidebar-menu>li>center>span {
+	    visibility: hidden;
+	}
+}
+
 body {
 	font-family: 'Muli', sans-serif; 
 }
