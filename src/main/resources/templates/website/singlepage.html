@@ -102,10 +102,23 @@
 			margin-bottom: 15px;
 		}
 		
-		.planos:hover {
+		.planos:hover + .preco{
 		    -ms-transform: scale(1.1,1.1);
 		    -webkit-transform: scale(1.1,1.1);
 		    transform: scale(1.1,1.1);
+		}
+		
+		.planos:hover{
+		    -ms-transform: scale(1.1,1.1);
+		    -webkit-transform: scale(1.1,1.1);
+		    transform: scale(1.1,1.1);
+		}
+		
+		.preco{
+			color: #333333;
+		    position: absolute;
+		    top: 300px;
+		    right: 135px;
 		}
     </style>
 </head>
@@ -593,17 +606,23 @@
 	    <div class="row" style="margin-right: 30px; margin-left: 30px;">
 	        <div class="col-lg-4">
 	        	<center>
-					<a th:href="@{/testeGratis/novo}" onclick="sessionStorage.setItem('plano', 'basico');"><img class="img-fluid planos" th:src="@{/imgs/webpage/basico.png}" alt="plano" style="max-width: 70%;"></a>
+					<a th:href="@{/testeGratis/novo}" onclick="sessionStorage.setItem('plano', 'basico');"><img class="img-fluid planos" th:src="@{/imgs/webpage/basico.png}" alt="plano" style="max-width: 70%;">
+						<h1 class="preco">39,90</h1>
+					</a>
 	        	</center>
 	        </div>
 	        <div class="col-lg-4">
 	        	<center>
-					<a th:href="@{/testeGratis/novo}" onclick="sessionStorage.setItem('plano', 'padrão');"><img class="img-fluid planos" th:src="@{/imgs/webpage/padrao.png}" alt="plano" style="max-width: 70%;"></a>
+					<a th:href="@{/testeGratis/novo}" onclick="sessionStorage.setItem('plano', 'padrão');"><img class="img-fluid planos" th:src="@{/imgs/webpage/padrao.png}" alt="plano" style="max-width: 70%;">
+						<h1 class="preco">49,90</h1>
+					</a>
 	       		</center>
 	        </div>
 	        <div class="col-lg-4">
 	        	<center>
-					<a th:href="@{/testeGratis/novo}" onclick="sessionStorage.setItem('plano', 'premium');"><img class="img-fluid planos" th:src="@{/imgs/webpage/premium.png}" alt="plano" style="max-width: 70%;"></a>
+					<a th:href="@{/testeGratis/novo}" onclick="sessionStorage.setItem('plano', 'premium');"><img class="img-fluid planos" th:src="@{/imgs/webpage/premium.png}" alt="plano" style="max-width: 70%;">
+						<h1 class="preco">59,90</h1>
+					</a>
 	        	</center>
 	        </div>
 	    </div>
