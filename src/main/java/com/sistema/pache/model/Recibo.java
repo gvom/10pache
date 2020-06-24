@@ -2,6 +2,9 @@ package com.sistema.pache.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -32,12 +35,19 @@ private static final long serialVersionUID = 1L;
 	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinColumn(name = "clienteId")
     private Cliente cliente;
-	@DateTimeFormat(pattern="dd/MM/yyyy")
+	@DateTimeFormat(pattern="yyyy-MM-dd'T'hh:mm")
     @Temporal(TemporalType.TIMESTAMP)
-	private Date data;
+	private Date dataVisturia;
+	@DateTimeFormat(pattern="yyyy-MM-dd'T'hh:mm")
+    @Temporal(TemporalType.TIMESTAMP)
+	private Date dataRecibo;
+	@DateTimeFormat(pattern="yyyy-MM-dd'T'hh:mm")
+    @Temporal(TemporalType.TIMESTAMP)
+	private Date dataEntrega;
 	@DateTimeFormat(pattern="dd/MM/yyyy")
     @Temporal(TemporalType.TIMESTAMP)
 	private Date dataCadastro;
+	private String dataEntregaString;
 	private String localEmissao;
 	private String valor;
 	private int via;
@@ -60,6 +70,20 @@ private static final long serialVersionUID = 1L;
 	@ManyToOne
 	@JoinColumn(name = "usuarioId")
 	private Usuario usuario;
+	
+	public int diferencaDias(Date date) {
+		int dias = 0;
+		if(date.after(this.dataRecibo)) {
+			LocalDate dateBefore = this.dataRecibo.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			LocalDate dateAfter = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			dias = (int) ChronoUnit.DAYS.between(dateBefore, dateAfter);
+		}else {
+			LocalDate dateBefore = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			LocalDate dateAfter = this.dataRecibo.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			dias = (int) ChronoUnit.DAYS.between(dateBefore, dateAfter);
+		}
+		return dias;
+	}
 	
 	public Usuario getUsuario() {
 		return usuario;
@@ -84,12 +108,6 @@ private static final long serialVersionUID = 1L;
 	}
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
-	}
-	public Date getData() {
-		return data;
-	}
-	public void setData(Date data) {
-		this.data = data;
 	}
 	public String getLocalEmissao() {
 		return localEmissao;
@@ -205,4 +223,31 @@ private static final long serialVersionUID = 1L;
 	public void setStatus(int status) {
 		this.status = status;
 	}
+	public Date getDataVisturia() {
+		return dataVisturia;
+	}
+	public void setDataVisturia(Date dataVisturia) {
+		this.dataVisturia = dataVisturia;
+	}
+	public Date getDataRecibo() {
+		return dataRecibo;
+	}
+	public void setDataRecibo(Date dataRecibo) {
+		this.dataRecibo = dataRecibo;
+	}
+	public Date getDataEntrega() {
+		return dataEntrega;
+	}
+	public void setDataEntrega(Date dataEntrega) {
+		this.dataEntrega = dataEntrega;
+	}
+
+	public String getDataEntregaString() {
+		return dataEntregaString;
+	}
+
+	public void setDataEntregaString(String dataEntregaString) {
+		this.dataEntregaString = dataEntregaString;
+	}
+	
 }

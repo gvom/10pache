@@ -1,5 +1,6 @@
 package com.sistema.pache.controller;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +38,15 @@ public class IndexController {
     		request.getSession().setAttribute("usrLogado", usuario);
     	}
     	
-    	model.addAttribute("lstRecibos", reciboService.buscarPorDataStatus(new Date()));
+    	Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DAY_OF_MONTH, -7);
+		Date dataVencimento = calendar.getTime();
+    	
+		model.addAttribute("dataVencimento", dataVencimento);
+		model.addAttribute("dataVencimentoReal", new Date());
+    	model.addAttribute("lstRecibos", reciboService.buscarPorReciboEmProcesso());
+    	model.addAttribute("lstDiaria", reciboService.buscarRecibosAgendadosPorData(new Date()));
+    	
     	return "admin/dashboard/dashboard";
     }
 
@@ -54,7 +63,14 @@ public class IndexController {
     @RequestMapping("/verificarlogin")
     public String verificarlogin(Model model, @AuthenticationPrincipal User user) {
         if (user != null) {
-        	model.addAttribute("lstRecibos", reciboService.buscarPorDataStatus(new Date()));
+        	Calendar calendar = Calendar.getInstance();
+    		calendar.add(Calendar.DAY_OF_MONTH, -7);
+    		Date dataVencimento = calendar.getTime();
+        	
+    		model.addAttribute("dataVencimento", dataVencimento);
+    		model.addAttribute("dataVencimentoReal", new Date());
+        	model.addAttribute("lstRecibos", reciboService.buscarPorReciboEmProcesso());
+        	model.addAttribute("lstDiaria", reciboService.buscarRecibosAgendadosPorData(new Date()));
             return "redirect:dashboard/dashboard";
         }
         return "admin/login";

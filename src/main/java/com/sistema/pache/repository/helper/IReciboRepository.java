@@ -16,5 +16,7 @@ public interface IReciboRepository {
 	
 	public List<Recibo> buscarTodos();
 
-	public List<Recibo> buscarPorDataStatus(Date data);
+	public List<Recibo> buscarPorReciboEmProcesso();
+
+	public List<Recibo> buscarRecibosAgendadosPorData(Date data);
 }

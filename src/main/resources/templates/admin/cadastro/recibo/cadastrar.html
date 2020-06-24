@@ -110,20 +110,31 @@
 										<label class="control-label" for="nomeCompleto"> Valor do Veículo</label>
 										<input class="form-control" th:field="*{valor}" id="valor" required="true"></input>
 									</div>
-									<div class="form-group col-md-3">
+									<div class="form-group col-md-5">
 										<label class="control-label" for="nomeCompleto"> Status do Recibo</label>
-										<select class="form-control" id="status" th:field="*{status}">
+										<select class="form-control" id="status" th:field="*{status}" onchange="verifivarStatus();">
 											<option value="0">Cadastrado</option>
-											<option value="1">Em Vistoria</option>
-											<option value="2">Entrada na Delegacia</option>
-											<option value="3">Retirada da Delegacia</option>
-											<option value="4">Entrega ao Cliente</option>
+											<option value="1">Vistoria Agendada</option>
+											<option value="2">Em Vistoria</option>
+											<option value="3">Entrada na Delegacia</option>
+											<option value="4">Retirada da Delegacia</option>
 											<option value="5">Concluído o Processo</option>
+											<option value="6">Entrega ao Cliente </option>
 										</select>
 									</div>
-									<div class="form-group col-md-1">
-										<label class="control-label" for="nomeCompleto"> Retirada/Dias</label>
-										<input class="form-control" type="number" name="dias" min="0" value="0">
+								</div>
+								<div class="row">
+									<div class="form-group col-md-3">
+										<label class="control-label" for="nomeCompleto"> Data Recibo</label>
+										<input class="form-control" type="datetime-local" th:field="*{dataRecibo}" id="dataRecibo" required="true">
+									</div>
+									<div class="form-group col-md-3">
+										<label class="control-label" for="nomeCompleto"> Data Vistoria</label>
+										<input class="form-control dt" type="datetime-local" th:field="*{dataVisturia}" id="dataVisturia" readonly>
+									</div>
+									<div class="form-group col-md-3">
+										<label class="control-label" for="nomeCompleto"> Data de Entrega ao Cliente</label>
+										<input class="form-control dt" type="datetime-local" th:field="*{dataEntregaString}" id="dataEntrega" readonly>
 									</div>
 								</div>
 								<div class="row">
@@ -145,7 +156,7 @@
 								<div class="row">
 									<div class="form-group col-md-3">
 										<label class="control-label" for="nomeCompleto"> Email</label> 
-										<input type="text" class="form-control" th:field="*{cliente.email}" id="email" required="true">
+										<input type="text" class="form-control" th:field="*{cliente.email}" id="email">
 									</div>
 									<div class="form-group col-md-3">
 										<label class="control-label" for="nomeCompleto"> Telefone</label>
@@ -156,19 +167,19 @@
                                 	<div class="col-md-2">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">CEP</label>
-                                        	<input th:field="*{cliente.endereco.cep}" id="cep" class="form-control" required="true">
+                                        	<input th:field="*{cliente.endereco.cep}" id="cep" class="form-control">
                                         </div>
                                     </div>
                                 	<div class="col-md-5">
 	                                    <div class="form-group">
 	                                        <label for="exampleInputEmail1">Logradouro</label>
-	                                        <input th:field="*{cliente.endereco.logradouro}" maxlength="40" id="rua" class="form-control" required="true">
+	                                        <input th:field="*{cliente.endereco.logradouro}" maxlength="40" id="rua" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Número</label>
-                                        	<input type="number" th:field="*{cliente.endereco.numero}" id="numero" maxlength="8" class="form-control" required="true">
+                                        	<input type="number" th:field="*{cliente.endereco.numero}" id="numero" maxlength="8" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -182,19 +193,19 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Bairro</label>
-                                        	<input th:field="*{cliente.endereco.bairro}" maxlength="40" id="bairro" class="form-control" required="true">
+                                        	<input th:field="*{cliente.endereco.bairro}" maxlength="40" id="bairro" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Cidade</label>
-                                        	<input th:field="*{cliente.endereco.cidade}" maxlength="40" id="cidade" class="form-control" required="true">
+                                        	<input th:field="*{cliente.endereco.cidade}" maxlength="40" id="cidade" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">UF</label>
-                                        	<input th:field="*{cliente.endereco.estado}" maxlength="2" id="uf" class="form-control" required="true">
+                                        	<input th:field="*{cliente.endereco.estado}" maxlength="2" id="uf" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -447,6 +458,27 @@
 					} //end if.                                
 				});
 			});
+			
+			function verifivarStatus(){
+				var st = $("#status").val();
+				$(".dt").attr("readonly", true);
+				if(st == 1){
+					$("#dataVisturia").attr("readonly", false);
+					new PNotify({
+						title : 'Atenção!',
+						text : 'Digite a data de visturia agendada!',
+						type : 'warning'
+					});
+				}
+				if(st == 5){
+					$("#dataEntrega").attr("readonly", false);
+					new PNotify({
+						title : 'Atenção!',
+						text : 'Digite a data de entrega do veiculo para o cliente!',
+						type : 'warning'
+					});
+				}
+			}
 			</script>
 		</th:block>
 	</div>

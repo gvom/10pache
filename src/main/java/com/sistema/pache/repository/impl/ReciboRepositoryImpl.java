@@ -1,5 +1,6 @@
 package com.sistema.pache.repository.impl;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -60,20 +61,40 @@ public class ReciboRepositoryImpl implements IReciboRepository {
     }
 
 	@Override
-	public List<Recibo> buscarPorDataStatus(Date data) {
+	public List<Recibo> buscarPorReciboEmProcesso() {
 		Usuario usr = (Usuario) session.getAttribute("usrLogado");
 		
 		String term = "";
     	if(usr.getTipoUsuario() != 0) {
     		term = "and u.usuarioId = :usuarioId";
     		return this.manager.createQuery("from " + Recibo.class.getName() + " gu join fetch gu.usuario u "
-    				+ "where gu.status != 5 and (gu.data < :data or gu.data is null) " + term + " order by gu.data", Recibo.class)
+    				+ "where gu.status != 6 and and gu.status != 1 and gu.status != 5" + term + " order by gu.dataRecibo", Recibo.class)
+    				//.setParameter("dataVencimento", dataVencimento)
+    				.setParameter("usuarioId", usr.getUsuarioId())
+    				.getResultList();
+    	}else {
+    		return this.manager.createQuery("from " + Recibo.class.getName() + " gu join fetch gu.usuario u "
+    				+ "where gu.status != 6 and gu.status != 1 and gu.status != 5" + term + " order by gu.dataRecibo", Recibo.class)
+    				//.setParameter("dataVencimento", dataVencimento)
+    				.getResultList();
+    	}
+	}
+	
+	@Override
+	public List<Recibo> buscarRecibosAgendadosPorData(Date data) {
+		Usuario usr = (Usuario) session.getAttribute("usrLogado");
+		
+		String term = "";
+    	if(usr.getTipoUsuario() != 0) {
+    		term = "and u.usuarioId = :usuarioId";
+    		return this.manager.createQuery("from " + Recibo.class.getName() + " gu join fetch gu.usuario u "
+    				+ "where (gu.status = 1 and gu.dataVisturia <= :data) or (gu.status = 5 and gu.dataEntrega <= :data) " + term + " order by gu.dataRecibo", Recibo.class)
     				.setParameter("data", data)
     				.setParameter("usuarioId", usr.getUsuarioId())
     				.getResultList();
     	}else {
     		return this.manager.createQuery("from " + Recibo.class.getName() + " gu join fetch gu.usuario u "
-    				+ "where gu.status != 5 and (gu.data < :data or gu.data is null) " + term + " order by gu.data", Recibo.class)
+    				+ "where (gu.status = 1 and gu.dataVisturia <= :data) or (gu.status = 5 and gu.dataEntrega <= :data) " + term + " order by gu.dataRecibo", Recibo.class)
     				.setParameter("data", data)
     				.getResultList();
     	}

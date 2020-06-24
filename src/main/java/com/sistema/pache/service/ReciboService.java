@@ -85,8 +85,13 @@ public class ReciboService {
 	}
 	
 	@Transactional
-	public List<Recibo> buscarPorDataStatus(Date data) {
-		return this.repository.buscarPorDataStatus(data);
+	public List<Recibo> buscarPorReciboEmProcesso() {
+		return this.repository.buscarPorReciboEmProcesso();
+	}
+	
+	@Transactional
+	public List<Recibo> buscarRecibosAgendadosPorData(Date data) {
+		return this.repository.buscarRecibosAgendadosPorData(data);
 	}
 	
 	@Transactional
@@ -98,9 +103,7 @@ public class ReciboService {
     	Usuario user = usuarioService.buscarPorId(recibo.getUsuario().getUsuarioId());
     	
     	String nome = recibo.getCliente().getNome();
-    	String endereco = recibo.getCliente().getEndereco().getCidade() + ", " + recibo.getCliente().getEndereco().getEstado()
-    			+ ", Bairro " + recibo.getCliente().getEndereco().getBairro() + ", Rua " 
-    			+ recibo.getCliente().getEndereco().getLogradouro() + ", Nº " + recibo.getCliente().getEndereco().getNumero();
+    	String endereco = recibo.getCliente().getEndereco().getLogradouro() + ", " + recibo.getCliente().getEndereco().getBairro() + ", Nº " + recibo.getCliente().getEndereco().getNumero() ;
     	String enderecoContinuacao = "";
     	String nomeContinuacao = "";
     	

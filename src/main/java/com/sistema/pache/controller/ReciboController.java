@@ -1,5 +1,8 @@
 package com.sistema.pache.controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -107,32 +110,28 @@ public class ReciboController {
 	}
 	
 	@PostMapping("/recibo/adicionar")
-	public String adicionar(@ModelAttribute("recibo") @Valid Recibo recibo,
-			@RequestParam("dias") int dias, @AuthenticationPrincipal User user, 
+	public String adicionar(@ModelAttribute("recibo") @Valid Recibo recibo, @AuthenticationPrincipal User user, 
 			BindingResult result, Model model, RedirectAttributes redirectAttributes) {
 		BCryptPasswordEncoder b = new BCryptPasswordEncoder();
 		
 		Usuario usr = (Usuario) session.getAttribute("usrLogado");
-		
-		if(recibo.getStatus() == 2) {
-			recibo.setStatus(3);
-		}
-		Date data = new Date();
-		
-		if(dias != 0) {
-			Calendar c = Calendar.getInstance(); 
-			c.setTime(data); 
-			c.add(Calendar.DATE, dias);
-			data = c.getTime();
-		}
 				
+		String dataEntregaString = recibo.getDataEntregaString();
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
+		
+		if(!dataEntregaString.equals("")) {
+			try {
+				Date date = (Date)formatter.parse(dataEntregaString);
+				recibo.setDataEntrega(date);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+		}
+		
 		 if (recibo.getReciboId() > 0) {
 				 Recibo temp = reciboService.buscarPorId(recibo.getReciboId());
-				 if((temp.getStatus() == recibo.getStatus() && dias != 0) || (temp.getStatus() != recibo.getStatus())) {
-					 recibo.setData(data);
-				 }else {
-					 recibo.setData(temp.getData());
-				 }
+				 
 				 recibo.setDataCadastro(temp.getDataCadastro());
 				 
 	            if (result.hasErrors()){               	                              
@@ -159,7 +158,6 @@ public class ReciboController {
 	            } else {
 	            	recibo.getCliente().setUsuario(usr);
 	            	recibo.setUsuario(usr);
-	            	recibo.setData(data);
 	            	recibo.setDataCadastro(new Date());
 	            	reciboService.salvar(recibo);
 	                redirectAttributes.addFlashAttribute("msg","Recibo cadastrado com sucesso!"); 
