@@ -27,7 +27,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 public class Recibo implements Serializable{
 
-private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,6 +48,7 @@ private static final long serialVersionUID = 1L;
     @Temporal(TemporalType.TIMESTAMP)
 	private Date dataCadastro;
 	private String dataEntregaString;
+	private String dataVisturiaString;
 	private String localEmissao;
 	private String valor;
 	private int via;
@@ -248,6 +249,14 @@ private static final long serialVersionUID = 1L;
 
 	public void setDataEntregaString(String dataEntregaString) {
 		this.dataEntregaString = dataEntregaString;
+	}
+
+	public String getDataVisturiaString() {
+		return dataVisturiaString;
+	}
+
+	public void setDataVisturiaString(String dataVisturiaString) {
+		this.dataVisturiaString = dataVisturiaString;
 	}
 	
 }

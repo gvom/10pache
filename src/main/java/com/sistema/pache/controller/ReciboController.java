@@ -117,6 +117,7 @@ public class ReciboController {
 		Usuario usr = (Usuario) session.getAttribute("usrLogado");
 				
 		String dataEntregaString = recibo.getDataEntregaString();
+		String dataVisturiaString = recibo.getDataVisturiaString();
 		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
 		
 		if(!dataEntregaString.equals("")) {
@@ -127,6 +128,15 @@ public class ReciboController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
+		}
+		if(!dataVisturiaString.equals("")) {
+			try {
+				Date date = (Date)formatter.parse(dataVisturiaString);
+				recibo.setDataVisturia(date);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		 if (recibo.getReciboId() > 0) {
