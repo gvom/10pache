@@ -24,7 +24,7 @@
 				<ul class="treeview-menu">
 				
 					<li class="blockCountdown"><a th:href="@{/usuario/lista}"
-						class="menu-link"><i class="fa fa-user"></i>Usuarios</a></li>
+						class="menu-link"><i class="fa fa-user-circle-o"></i>Usuarios</a></li>
 					
 					<li class="blockCountdown"><a th:href="@{/usuario/leads}"
 						><i class="fa fa-handshake-o"></i>Leads</a></li>
@@ -33,16 +33,24 @@
 						><i class="fa fa-envelope"></i>Contatos</a></li>
 				</ul>
 			</li>
-							
-			<li>
-				<a th:href="@{/cliente/lista}">
-					<i class="fa fa-user"></i> <span>Cliente</span>
+			
+			<li th:if="${session.usrLogado.tipoUsuario == 0}">
+				<a th:href="@{/veiculo/lista}">
+					<i class="fa fa-car"></i> <span>Veiculos</span>
 					<span class="pull-right-container"></span>
 				</a>
 	        </li>
+	        				
+			<li>
+				<a th:href="@{/cliente/lista}">
+					<i class="fa fa-user"></i> <span>Clientes</span>
+					<span class="pull-right-container"></span>
+				</a>
+	        </li>
+	        
 	        <li>
 				<a th:href="@{/recibo/lista}">
-					<i class="fa fa-file-text-o"></i> <span>Recibo</span>
+					<i class="fa fa-file-text-o"></i> <span>Recibos</span>
 					<span class="pull-right-container"></span>
 				</a>
 	        </li>
