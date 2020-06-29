@@ -8,6 +8,7 @@ import java.time.temporal.ChronoUnit;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -68,6 +69,7 @@ public class Recibo implements Serializable{
 	private String cor;
 	private String observacao;
 	private int status = 0;
+	private int veiculoId = 0;
 	@ManyToOne
 	@JoinColumn(name = "usuarioId")
 	private Usuario usuario;
@@ -257,6 +259,14 @@ public class Recibo implements Serializable{
 
 	public void setDataVisturiaString(String dataVisturiaString) {
 		this.dataVisturiaString = dataVisturiaString;
+	}
+
+	public int getVeiculoId() {
+		return veiculoId;
+	}
+
+	public void setVeiculoId(int veiculoId) {
+		this.veiculoId = veiculoId;
 	}
 	
 }

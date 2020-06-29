@@ -33,42 +33,6 @@
 				<div class="col-md-12">
 					<div class="box box-info">
 						<div class="box-header with-border">
-							<h4>Recibos em Processo <a class="btn btn-primary pull-right" th:href="@{/recibo/novoAlt}"><i class="fa fa-plus"></i> Novo Recibo</a></h4>
-						</div>
-						<div class="box-body">
-							<div class="row" th:if="${#lists.isEmpty(lstRecibos)}"><center style="background-color: #e8e5e5; margin-bottom: 10px;">Nenhum Recibo em Processo</center></div>
-							<div class="col-md-4" th:each="recibos : ${lstRecibos}">
-								<div class="recibos-container">
-									<div class="recibo">
-										<div class="recibo-preview" th:style="${recibos.diferencaDias(dataVencimentoReal) <= 7 ? 'background-color: #e89106;' : recibos.dataRecibo.before(dataVencimento) ? 'background-color: #9c2b2b;' : ''}">
-											<h6 style="margin-top: 0px;">Situação do Recibo</h6>
-											<th:block th:switch="${recibos.status}">
-											    <h4 th:case="0"><b>Cadastrado</b></h4>
-											    <h4 th:case="2"><b>Em Vistoria</b></h4>
-											    <h4 th:case="3"><b>Entrada na Delegacia</b></h4>
-											    <h4 th:case="4"><b>Retirada da Delegacia</b></h4>
-											</th:block>
-										</div>
-										<div class="recibo-info">
-											<h6>Informações</h6>
-											<h4><b th:text="${recibos.placa}"><b></h4>
-											<h4><b th:text="${#dates.format(recibos.dataRecibo, 'dd/MM/yyyy')}"><b></h4>
-											<h4 style="position: absolute;" th:if="${recibos.dataRecibo.after(dataVencimento) && recibos.diferencaDias(dataVencimentoReal) <= 7}"><b>Vencimento em <b th:text="${recibos.diferencaDias(dataVencimentoReal)}" /> dias/s</b></h4>
-											<h4 style="position: absolute;" th:if="${recibos.dataRecibo.before(dataVencimento)}"><b>Venceu há <b th:text="${recibos.diferencaDias(dataVencimentoReal)}" /> dia/s</b></h4>
-											<a class="btnRec btn" th:href="@{/recibo/atualizar/} + ${recibos.reciboId}" th:style="${recibos.diferencaDias(dataVencimentoReal) <= 7 ? 'background-color: #e89106;' : recibos.dataRecibo.before(dataVencimento) ? 'background-color: #9c2b2b;' : ''}"><i class="fa fa-eye" aria-hidden="true"></i> Abir Recibo</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<div class="box box-info">
-						<div class="box-header with-border">
 							<h4>Agenda do Dia</h4>
 						</div>
 						<div class="box-body">
@@ -86,12 +50,48 @@
 										<div class="recibo-info">
 											<h6>Informações</h6>
 											<th:block th:switch="${recibos.status}">
-											    <h4 th:case="1"><b th:text="${recibos.dataVisturia}"></h4>
-											    <h4 th:case="5"><b th:text="${recibos.dataEntrega}"></h4>
+											    <h4 th:case="1"><b th:text="${#dates.format(recibos.dataVisturia, 'dd/MM/yyyy hh:mm')}"></h4>
+											    <h4 th:case="5"><b th:text="${#dates.format(recibos.dataEntrega, 'dd/MM/yyyy hh:mm')}"></h4>
 											</th:block>
 											<h4><b th:text="${recibos.placa}"><b></h4>
 											<h4><b th:text="${recibos.cliente.telefone}"><b></h4>
 											<a class="btnRec btn" th:href="@{/recibo/atualizar/} + ${recibos.reciboId}" th:style="${recibos.diferencaDias(dataVencimentoReal) <= 7 ? 'background-color: #e89106;' : recibos.dataRecibo.before(dataVencimento) ? 'background-color: #9c2b2b;' : ''}"><i class="fa fa-eye" aria-hidden="true"></i> Abir Recibo</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="box box-info">
+						<div class="box-header with-border">
+							<h4>Recibos em Processo <a class="btn btn-primary pull-right" th:href="@{/recibo/novoAlt}"><i class="fa fa-plus"></i> Novo Recibo</a></h4>
+						</div>
+						<div class="box-body">
+							<div class="row" th:if="${#lists.isEmpty(lstRecibos)}"><center style="background-color: #e8e5e5; margin-bottom: 10px;">Nenhum Recibo em Processo</center></div>
+							<div class="col-md-4" th:each="recibos : ${lstRecibos}">
+								<div class="recibos-container">
+									<div class="recibo">
+										<div class="recibo-preview" th:style="${(recibos.diferencaDias(dataVencimentoReal) <= 7 && recibos.diferencaDias(dataVencimentoReal) > 2)  ? 'background-color: #e89106;' : recibos.dataRecibo.before(dataVencimento) ? 'background-color: #9c2b2b;' : recibos.diferencaDias(dataVencimentoReal) <= 2 ? 'background-color: #9c2b2b;' : ''}">
+											<h6 style="margin-top: 0px;">Situação do Recibo</h6>
+											<th:block th:switch="${recibos.status}">
+											    <h4 th:case="0"><b>Cadastrado</b></h4>
+											    <h4 th:case="2"><b>Em Vistoria</b></h4>
+											    <h4 th:case="3"><b>Entrada na Delegacia</b></h4>
+											    <h4 th:case="4"><b>Retirada da Delegacia</b></h4>
+											</th:block>
+										</div>
+										<div class="recibo-info">
+											<h6>Informações</h6>
+											<h4><b th:text="${recibos.placa}"><b></h4>
+											<h4><b th:text="${#dates.format(recibos.dataRecibo, 'dd/MM/yyyy')}"><b></h4>
+											<h4 style="position: absolute;" th:if="${recibos.dataRecibo.after(dataVencimento) && recibos.diferencaDias(dataVencimentoReal) <= 7}"><b>Vencimento em <b th:text="${recibos.diferencaDias(dataVencimentoReal)}" /> dias/s</b></h4>
+											<h4 style="position: absolute;" th:if="${recibos.dataRecibo.before(dataVencimento)}"><b>Venceu há <b th:text="${recibos.diferencaDias(dataVencimentoReal)}" /> dia/s</b></h4>
+											<a class="btnRec btn" th:href="@{/recibo/atualizar/} + ${recibos.reciboId}" th:style="${(recibos.diferencaDias(dataVencimentoReal) <= 7 && recibos.diferencaDias(dataVencimentoReal) > 2)  ? 'background-color: #e89106;' : recibos.dataRecibo.before(dataVencimento) ? 'background-color: #9c2b2b;' : recibos.diferencaDias(dataVencimentoReal) <= 2 ? 'background-color: #9c2b2b;' : ''}"><i class="fa fa-eye" aria-hidden="true"></i> Abir Recibo</a>
 										</div>
 									</div>
 								</div>

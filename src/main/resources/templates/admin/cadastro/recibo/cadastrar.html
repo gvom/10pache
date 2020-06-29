@@ -104,6 +104,7 @@
 								<input type="hidden" th:field="*{cliente.clienteId}" id="clienteId"/>
 								<input type="hidden" th:field="*{cliente.endereco.idEndereco}" id="idEndereco"/>
 								<input type="hidden" name="paginaAnterior" val="${paginaAnterior}"/>
+								<input type="hidden" th:field="*{veiculoId}" id="veiculoId"/>
 								
 								<div class="row">
 									<div class="form-group col-md-4">
@@ -140,7 +141,7 @@
 								<div class="row">
 									<div class="form-group col-md-4">
 										<label class="control-label" for="nomeCompleto"> CPF/CNPJ</label>
-										<input type="text" class="form-control" th:field="*{cliente.cpf}" id="cpf" required="true">
+										<input type="text" class="form-control" th:field="*{cliente.cpf}" id="cpf" onchange="buscarPorCpf();" required="true">
 									</div>
 									<div class="form-group col-md-4">
 										<label class="control-label" for="nomeCompleto"> Identidade</label>
@@ -238,16 +239,16 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-4">
+                                	<div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Placa do Veículo</label>
-                                        	<input th:field="*{placa}" maxlength="40" id="placa" class="form-control" >
+                                            <label for="exampleInputEmail1">Chassi</label>
+                                        	<input th:field="*{chassi}" maxlength="40" id="chassi" class="form-control" >
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Chassi</label>
-                                        	<input th:field="*{chassi}" maxlength="40" id="chassi" class="form-control" >
+                                            <label for="exampleInputEmail1">Placa do Veículo</label>
+                                        	<input th:field="*{placa}" maxlength="40" id="placa" class="form-control" >
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -407,6 +408,40 @@
 							            //alert('falhou');
 							        }
 							    });
+				        	}
+				        },
+				        error: function () {
+				            //alert('falhou');
+				        }
+				    });
+				});
+				
+				$("#chassi").blur(function() {
+					
+					var chassi = $("#chassi").val();
+					
+					$.ajax({
+				        type: "POST",
+				        url: '/veiculo/buscarPorChassi',
+				        data: {
+				        	chassi : chassi
+				        },
+				        success: function (data) {
+				        	
+				        	if(data != ""){
+								var veiculoJson = JSON.parse(data);
+								
+					        	$("#veiculoId").val(veiculoJson.veiculoId);
+					        	$("#placa").val(veiculoJson.placa);
+					        	$("#antUf").val(veiculoJson.antUf);
+					        	$("#combustivel").val(veiculoJson.combustivel);
+					        	$("#especie").val(veiculoJson.especie);								
+								$("#marca").val(veiculoJson.marca);
+					        	$("#anoFab").val(veiculoJson.anoFab);
+					        	$("#anoMod").val(veiculoJson.anoMod);
+					        	$("#capPotCil").val(veiculoJson.capPotCil);
+					        	$("#categoria").val(veiculoJson.categoria);
+								$("#cor").val(veiculoJson.cor);
 				        	}
 				        },
 				        error: function () {

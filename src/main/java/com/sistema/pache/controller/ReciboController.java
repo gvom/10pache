@@ -34,9 +34,11 @@ import com.sistema.pache.model.Endereco;
 import com.sistema.pache.model.EnderecoTemp;
 import com.sistema.pache.model.Recibo;
 import com.sistema.pache.model.Usuario;
+import com.sistema.pache.model.Veiculo;
 import com.sistema.pache.service.ClienteService;
 import com.sistema.pache.service.EnderecoService;
 import com.sistema.pache.service.ReciboService;
+import com.sistema.pache.service.VeiculoService;
 
 @Controller
 public class ReciboController {
@@ -46,6 +48,9 @@ public class ReciboController {
 	
 	@Autowired
 	private ClienteService clienteService;
+	
+	@Autowired
+	private VeiculoService veiculoService;
 	
 	@Autowired
 	private EnderecoService enderecoService;
@@ -155,6 +160,7 @@ public class ReciboController {
 	            			enderecoService.atualizar(enderecoTemp);
 	            		}
 	            	}
+	            	recibo.setVeiculoId(salvarVeiculo(recibo, usr));
 	            	Recibo recTe = reciboService.buscarPorId(recibo.getReciboId());
 	            	recibo.getCliente().setUsuario(recTe.getUsuario());
 	            	recibo.setUsuario(recTe.getUsuario());
@@ -166,6 +172,7 @@ public class ReciboController {
 	            if (result.hasErrors()) {
 	            	return "redirect:/recibo/novo";
 	            } else {
+	            	recibo.setVeiculoId(salvarVeiculo(recibo, usr));
 	            	recibo.getCliente().setUsuario(usr);
 	            	recibo.setUsuario(usr);
 	            	recibo.setDataCadastro(new Date());
@@ -173,7 +180,7 @@ public class ReciboController {
 	                redirectAttributes.addFlashAttribute("msg","Recibo cadastrado com sucesso!"); 
 	            }
 	        }
-	        return "redirect:/recibo/atualizar/"+recibo.getReciboId();
+	        return "redirect:/recibo/lista";
 	}
 	
 	@RequestMapping("/recibo/buscarPorCpf")
@@ -218,5 +225,36 @@ public class ReciboController {
     	
     	return "redirect:/recibo/lista";
     }
+	
+	public int salvarVeiculo(Recibo recibo, Usuario usr) {
+		Veiculo veiculo = new Veiculo();
+    	veiculo.setVeiculoId(recibo.getVeiculoId());
+    	Veiculo temp = veiculoService.buscarPorId(veiculo.getVeiculoId());
+    	if(veiculo.getVeiculoId() > 0 && temp != null) {
+    		int id = veiculo.getVeiculoId();
+    		veiculo.setDataUltimoRegistro(new Date());
+    		veiculo.setAntUf(recibo.getAntUf());
+    		veiculo.setCapPotCil(recibo.getCapPotCil());
+        	veiculo.setCor(recibo.getCor());
+        	veiculo.setPlaca(recibo.getPlaca());
+        	veiculoService.atualizar(veiculo);
+        	return id;
+    	}else {
+    		veiculo.setAnoFab(recibo.getAnoFab());
+    		veiculo.setMarca(recibo.getMarca());
+    		veiculo.setUsuario(usr);
+    		veiculo.setDataCadastro(new Date());
+    		veiculo.setCombustivel(recibo.getCombustivel());
+    		veiculo.setCategoria(recibo.getCategoria());
+        	veiculo.setChassi(recibo.getChassi());
+        	veiculo.setEspecie(recibo.getEspecie());
+        	veiculo.setAnoMod(recibo.getAnoMod());
+        	veiculo.setCapPotCil(recibo.getCapPotCil());
+        	veiculo.setCor(recibo.getCor());
+        	veiculo.setPlaca(recibo.getPlaca());
+        	veiculoService.salvar(veiculo);
+        	return veiculoService.buscarUltimoCadastro().getVeiculoId();
+    	}
+	}
 }
 

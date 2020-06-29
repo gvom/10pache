@@ -77,4 +77,26 @@ public class ClienteRepositoryImpl implements IClienteRepository {
         			.getSingleResult();
     	}
     }
+
+	@Override
+	public Cliente buscarPorCpfIdentidade(String cpf, String rg) {
+		Usuario usr = (Usuario) session.getAttribute("usrLogado");
+    	
+    	String term = "";
+    	if(usr.getTipoUsuario() != 0) {
+    		term = "and u.usuarioId = :usuarioId";
+    		return this.manager.createQuery("from " + Cliente.class.getName() + " gu join fetch gu.usuario u "
+        			+ "where gu.cpf = :cpf or gu.rg = :rg " + term, Cliente.class)
+        			.setParameter("cpf", cpf)
+        			.setParameter("rg", rg)
+        			.setParameter("usuarioId", usr.getUsuarioId())
+        			.getSingleResult();
+    	}else {
+    		return this.manager.createQuery("from " + Cliente.class.getName() + " gu join fetch gu.usuario u "
+        			+ "where gu.cpf = :cpf or gu.rg = :rg " + term, Cliente.class)
+        			.setParameter("cpf", cpf)
+        			.setParameter("rg", rg)
+        			.getSingleResult();
+    	}
+	}
 }

@@ -16,4 +16,6 @@ public interface IClienteRepository {
 	public List<Cliente> buscarTodos();
 
 	public Cliente buscarPorCpf(String cpf);
+	
+	public Cliente buscarPorCpfIdentidade(String cpf, String rg);
 }

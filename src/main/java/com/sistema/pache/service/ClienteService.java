@@ -45,4 +45,9 @@ public class ClienteService {
 	public Cliente buscarPorCpf(String cpf) {
 		return this.repository.buscarPorCpf(cpf);
 	}
+	
+	@Transactional
+	public Cliente buscarPorCpfIdentidade(String cpf, String rg) {
+		return this.buscarPorCpfIdentidade(cpf, rg);
+	}
 }

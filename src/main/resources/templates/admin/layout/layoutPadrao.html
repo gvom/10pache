@@ -157,7 +157,7 @@ body {
 .btnRec {
 	background-color: #2B369C;
 	border: 0;
-	border-radius: 50px;
+	border-radius: 50px !important;
 	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
 	color: #fff;
 	position: absolute;
@@ -177,6 +177,14 @@ body {
     background-color: #192594;
 }
 
+.btn, .main-header, .main-sidebar{
+	box-shadow: 0 7px 9px rgba(0, 0, 0, .16), 0 2px 9px rgba(0, 0, 0, .23);
+}
+
+.btn{
+	border-radius: 10px;
+}
+
 .btn-primary {
     background-color: #2b369c !important;
     border-color: #2b369c !important;
@@ -191,7 +199,7 @@ body {
 
 		<div th:replace="admin/layout/fragments/sidebar :: sidebar"></div>
 
-		<div class="content-wrapper">
+		<div class="content-wrapper" style="background-color: #e8e8e8;">
 			<div id="aguarde" style="display: none; z-index: 9999;"
 				class="gifcenter">
 				<img th:src="@{/imgs/ajax-loader.gif}" height="100px;"
