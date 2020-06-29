@@ -9,12 +9,12 @@
 <body>
 
 	<header class="main-header" th:fragment="cabecalho">
-		<a th:href="@{/index}" class="logo" style="background-color: #2B369C !important;"> <!-- mini logo for sidebar mini 50x50 pixels -->
-			<span class="logo-mini" style="background-color: #2B369C !important;"><img th:src="@{/imgs/logo-simples.png}" style="height: 18px;"></span> <!-- logo for regular state and mobile devices -->
-			<span class="logo-lg" style="background-color: #2B369C !important;"><b style="color: #f79d2e">10</b>PACHE</span>
+		<a th:href="@{/index}" class="logo" style="background-color: #222d32 !important;"> <!-- mini logo for sidebar mini 50x50 pixels -->
+			<span class="logo-mini"><img th:src="@{/imgs/logo-simples.png}" style="height: 18px;"></span> <!-- logo for regular state and mobile devices -->
+			<span class="logo-lg"><b style="color: #f79d2e">10</b>PACHE</span>
 		</a>
 		<!-- Header Navbar: style can be found in header.less -->
-		<nav class="navbar navbar-static-top" style="background-color: #2B369C !important;">
+		<nav class="navbar navbar-static-top" style="background-color: #2B369C !important; border-radius: 0px 0px 24px 0px;">
 			<!-- Sidebar toggle button-->
 			<a href="#" class="sidebar-toggle" data-toggle="offcanvas"
 				role="button"> <span class="sr-only">Esconder Menu</span> <span
@@ -29,9 +29,9 @@
 							<span class="hidden-xs"
 							th:text="${session.usrLogado.nome}" >Usuário</span>
 					</a>
-						<ul class="dropdown-menu">
+						<ul class="dropdown-menu" style="border-radius: 24px;">
 							<!-- User image -->
-							<li class="user-header" style="background-color: #2B369C !important;"><img th:src="@{/imgs/avatar.png}"
+							<li class="user-header" style="border-radius: 24px 24px 0px 0px; background-color: #2B369C !important;"><img th:src="@{/imgs/avatar.png}"
 								class="img-circle" alt="User Image" />
 
 								<p th:text="${session.usrLogado.nome}" style="margin-bottom: 0px;">
@@ -39,14 +39,14 @@
 								</p><small style="color: white;">Codigo do Usuário: <b th:text="${session.usrLogado.usuarioId}"></b></small></li>
 							<!-- Menu Body -->
 							<!-- Menu Footer-->
-							<li class="user-footer">
+							<li class="user-footer" style="border-radius: 0px 0px 24px 24px; background: #bdbdbd;">
 								<div class="pull-left">
-									<a data-target="#modalAlterarSenhaDigitalAC"
+									<a data-target="#modalAlterarSenhaDigitalAC" style="border-radius: 24px;"
 										data-toggle="modal" href="#" class="btn btn-default btn-flat">Alterar
 										Senha</a>
 								</div>
 								<div class="pull-right">
-									<a id="btLogout" th:href="@{/logout}" class="btn btn-default btn-flat">Sair</a>
+									<a id="btLogout" th:href="@{/logout}" class="btn btn-default btn-flat"  style="border-radius: 24px;">Sair</a>
 								</div>
 							</li>
 						</ul></li>

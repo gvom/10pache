@@ -83,6 +83,24 @@
 <style>
 @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
 
+.recibo-preview{
+	max-width: 54%;
+}
+
+.main-header{
+	background-color: #e8e8e8;
+}
+
+.skin-blue .sidebar-menu>li:hover>a, .skin-blue .sidebar-menu>li.active>a {
+	border-radius: 24px 0px 0px 24px;
+	background: rgba(0, 0, 0, 0.23);
+}
+
+.skin-blue .main-header .navbar .nav>li>a:hover, .skin-blue .main-header .navbar .nav>li>a:active, .skin-blue .main-header .navbar .nav>li>a:focus, .skin-blue .main-header .navbar .nav .open>a, .skin-blue .main-header .navbar .nav .open>a:hover, .skin-blue .main-header .navbar .nav .open>a:focus, .skin-blue .main-header .navbar .nav>.active>a {
+    border-radius: 24px 0px 24px 24px;
+    background: rgba(0, 0, 0, 0.23);
+}
+
 .sidebar-menu>li>a>.fa, .sidebar-menu>li>a>.glyphicon, .sidebar-menu>li>a>.ion {
     font-size: 2em;
     line-height: 0.75em;
@@ -186,9 +204,10 @@ body {
 }
 .skin-blue .main-header .navbar .sidebar-toggle:hover {
     background-color: #192594;
+    border-radius: 0px 24px 24px 0px;
 }
 
-.btn, .main-header, .main-sidebar{
+.btn, .navbar.navbar-static-top, .main-sidebar{
 	box-shadow: 0 7px 9px rgba(0, 0, 0, .16), 0 2px 9px rgba(0, 0, 0, .23);
 }
 
