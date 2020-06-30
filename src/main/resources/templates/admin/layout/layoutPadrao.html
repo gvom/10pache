@@ -83,6 +83,38 @@
 <style>
 @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
 
+.treeview-menu{
+    border-radius: 0px 0px 24px 24px;
+    margin-left: 23px !important;
+    background-color: #1a2326 !important;
+}
+
+.treeview-menu::before {
+    content: "";
+    position: absolute;
+    background-color: transparent;
+    top: 45px;
+    height: 30px;
+    width: 15px;
+    border-top-right-radius: 15px;
+    box-shadow: 8px -5px 0 0 #1a2326;
+    left: 9px;
+}
+
+.box {
+    border-radius: 24px;
+}
+
+.fill-empty-menu{
+	background-color: #2b369c;
+    width: 100%;
+    height: 24px;
+    position: absolute;
+    z-index: -99;
+    left: -24px;;
+    top: 0px;
+}
+
 .recibo-preview{
 	max-width: 54%;
 }
@@ -203,12 +235,12 @@ body {
     border-top-color: #2b369c !important;
 }
 .skin-blue .main-header .navbar .sidebar-toggle:hover {
-    background-color: #192594;
+    background-color: #212a78;
     border-radius: 0px 24px 24px 0px;
 }
 
 .btn, .navbar.navbar-static-top, .main-sidebar{
-	box-shadow: 0 7px 9px rgba(0, 0, 0, .16), 0 2px 9px rgba(0, 0, 0, .23);
+	box-shadow: 7px 5px 25px -5px rgba(107,107,107,1);
 }
 
 .btn{
@@ -301,6 +333,14 @@ body {
 	<th:block layout:fragment="javascript-extra"></th:block>
 
 	<script>
+		$(window).load(function() {
+			$(".sidebar-toggle").hover(function(){
+					$(".fill-empty-menu").css("background-color", "#212a78");
+				}, function(){
+					$(".fill-empty-menu").css("background-color", "#2B369C ");
+			});
+		});
+	
 		function verificaSenhaConfirmacao() {
 			var senhaAntiga = $("#senhaAntiga").val();
 			

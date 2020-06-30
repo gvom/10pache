@@ -9,7 +9,8 @@
 <body>
 
 	<header class="main-header" th:fragment="cabecalho">
-		<a th:href="@{/index}" class="logo" style="background-color: #222d32 !important;"> <!-- mini logo for sidebar mini 50x50 pixels -->
+		<div class="fill-empty-menu"></div>
+		<a th:href="@{/index}" class="logo" style="background-color: #222d32 !important; border-top-right-radius: 24px; "> <!-- mini logo for sidebar mini 50x50 pixels -->
 			<span class="logo-mini"><img th:src="@{/imgs/logo-simples.png}" style="height: 18px;"></span> <!-- logo for regular state and mobile devices -->
 			<span class="logo-lg"><b style="color: #f79d2e">10</b>PACHE</span>
 		</a>
@@ -41,19 +42,18 @@
 							<!-- Menu Footer-->
 							<li class="user-footer" style="border-radius: 0px 0px 24px 24px; background: #bdbdbd;">
 								<div class="pull-left">
-									<a data-target="#modalAlterarSenhaDigitalAC" style="border-radius: 24px;"
+									<a data-target="#modalAlterarSenhaDigitalAC" style="border-radius: 24px; background-color: #f4f4f4 !important;"
 										data-toggle="modal" href="#" class="btn btn-default btn-flat">Alterar
 										Senha</a>
 								</div>
 								<div class="pull-right">
-									<a id="btLogout" th:href="@{/logout}" class="btn btn-default btn-flat"  style="border-radius: 24px;">Sair</a>
+									<a id="btLogout" th:href="@{/logout}" class="btn btn-default btn-flat"  style="border-radius: 24px; background-color: #f4f4f4 !important;">Sair</a>
 								</div>
 							</li>
 						</ul></li>
 				</ul>
 			</div>
 		</nav>
-
 	</header>
 
 </body>
