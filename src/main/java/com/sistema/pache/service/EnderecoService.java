@@ -15,6 +15,9 @@ public class EnderecoService {
 
 	@Autowired
 	private EnderecoRepository repository;
+	
+	@Autowired
+    private HistoricoService historicoService;
 
 	@Transactional(propagation = Propagation.NESTED)
 	public void salvar(Endereco endereco) {		
@@ -23,11 +26,13 @@ public class EnderecoService {
 
 	@Transactional
 	public void atualizar(Endereco endereco) {
+		historicoService.criarHistorico(endereco.getClass().getName(), endereco.getIdEndereco(), endereco, false);
 		this.repository.save(endereco);
 	}
 
 	@Transactional
 	public void remover(Endereco endereco) {
+		historicoService.criarHistorico(endereco.getClass().getName(), endereco.getIdEndereco(), endereco, true);
 		this.repository.delete(endereco);
 	}
 

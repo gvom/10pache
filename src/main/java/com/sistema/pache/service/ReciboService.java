@@ -26,6 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.gson.JsonObject;
 import com.sistema.pache.model.Recibo;
 import com.sistema.pache.model.Usuario;
 import com.sistema.pache.repository.ReciboRepository;
@@ -54,24 +55,25 @@ public class ReciboService {
 	private UsuarioService usuarioService;
 	
 	@Autowired
-    private ServletContext servletContext;
+    private HistoricoService historicoService;
 	
 	 @Autowired
 	 private ResourceLoader resourceLoader;
 
 	@Transactional(propagation = Propagation.NESTED)
-	public void salvar(Recibo contrato) {		
-		this.repository.save(contrato);
+	public void salvar(Recibo recibo) {		
+		this.repository.save(recibo);
 	}
 
 	@Transactional
-	public void atualizar(Recibo contrato) {
-		this.repository.save(contrato);
+	public void atualizar(Recibo recibo) {
+		this.repository.save(recibo);
 	}
 
 	@Transactional
-	public void remover(Recibo contrato) {
-		this.repository.delete(contrato);
+	public void remover(Recibo recibo) {
+		historicoService.criarHistorico(recibo.getClass().getName(), recibo.getReciboId(), recibo, true);
+		this.repository.delete(recibo);
 	}
 
 	@Transactional

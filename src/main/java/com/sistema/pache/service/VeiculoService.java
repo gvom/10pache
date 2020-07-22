@@ -16,6 +16,9 @@ public class VeiculoService {
 
 	@Autowired
 	private VeiculoRepository repository;
+	
+	@Autowired
+    private HistoricoService historicoService;
 
 	@Transactional(propagation = Propagation.NESTED)
 	public void salvar(Veiculo veiculo) {		
@@ -24,11 +27,13 @@ public class VeiculoService {
 
 	@Transactional
 	public void atualizar(Veiculo veiculo) {
+		historicoService.criarHistorico(veiculo.getClass().getName(), veiculo.getVeiculoId(), veiculo, false);
 		this.repository.save(veiculo);
 	}
 
 	@Transactional
 	public void remover(Veiculo veiculo) {
+		historicoService.criarHistorico(veiculo.getClass().getName(), veiculo.getVeiculoId(), veiculo, true);
 		this.repository.delete(veiculo);
 	}
 
