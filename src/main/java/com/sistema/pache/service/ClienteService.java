@@ -15,24 +15,20 @@ public class ClienteService {
 
 	@Autowired
 	private ClienteRepository repository;
-	
-	@Autowired
-    private HistoricoService historicoService;
 
 	@Transactional(propagation = Propagation.NESTED)
-	public void salvar(Cliente cliente) {		
-		this.repository.save(cliente);
+	public void salvar(Cliente contrato) {		
+		this.repository.save(contrato);
 	}
 
 	@Transactional
-	public void atualizar(Cliente cliente) {
-		this.repository.save(cliente);
+	public void atualizar(Cliente contrato) {
+		this.repository.save(contrato);
 	}
 
 	@Transactional
-	public void remover(Cliente cliente) {
-		historicoService.criarHistorico(cliente.getClass().getName(), cliente.getClienteId(), cliente, true);
-		this.repository.delete(cliente);
+	public void remover(Cliente contrato) {
+		this.repository.delete(contrato);
 	}
 
 	@Transactional
