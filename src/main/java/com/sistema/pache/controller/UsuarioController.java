@@ -208,15 +208,15 @@ public class UsuarioController {
 			UUID uuid = UUID.randomUUID();  
 			String myRandom = uuid.toString(); 
 			String senha = myRandom.substring(0,6);
+			usuario.setSenha(senha);
+			usuario = usuarioService.criptografaSenha(usuario);
 			usuario.setNome(nome);
 			usuario.setTelefone(telefone);
 			usuario.setLogin(email);
 			usuario.setEmail(email);
-			usuario.setSenha(senha);
 			usuario.setTeste((short)0);
 			usuario.setPlano(plano);
 			usuario.setDtCadastro(new Date());
-        	usuario = usuarioService.criptografaSenha(usuario);
 	        try {
 	            usuario.setPasswordHash(Criptografia.getMD5Code(usuario.getLogin()));
 	        } catch (NoSuchAlgorithmException ex) {

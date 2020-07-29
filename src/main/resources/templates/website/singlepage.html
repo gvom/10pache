@@ -7,9 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Mobile app HTML landing page template to help you build a great online presence for your app which will convert visitors into users">
-    <meta name="author" content="Inovatik">
+    <meta name="author" content="https://github.com/gvom">
 
     <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
 	<meta property="og:site_name" content="" /> <!-- website name -->
@@ -52,35 +50,35 @@
 			-ms-appearance: none;
 		    -o-appearance: none;
 		    appearance: none;
-		    background-image: url('../imgs/webpage/down-arrow.png');
+		    background-image: url(imgs/webpage/down-arrow.png);
 		    background-position: 96% 50%;
 		    background-repeat: no-repeat;
 		    outline: none;
 		}
 		
 		.header {
-			background: linear-gradient(to bottom right, rgba(72, 72, 212, 0), rgba(241, 104, 104, 0)), url('../imgs/webpage/header-background.jpg') center center no-repeat;
+			background: linear-gradient(to bottom right, rgba(72, 72, 212, 0), rgba(241, 104, 104, 0)), url(imgs/webpage/header-background.jpg) center center no-repeat;
 			background-size: cover;
 		}
 		
 		.basic-1 {
 			padding-top: 6.375rem;
 			padding-bottom: 6.875rem;
-			background: url('../imgs/webpage/video-background.jpg') center center no-repeat;
+			background: url(imgs/webpage/video-background.jpg) center center no-repeat;
 			background-size: cover; 
 		}
 		
 		.basic-4 {
 			padding-top: 6.5rem;
 			padding-bottom: 6.75rem;
-			background: url('../imgs/webpage/download-background.jpg') center center no-repeat;
+			background: url(imgs/webpage/download-background.jpg) center center no-repeat;
 			background-size: cover; 
 		}
 		
 		.form {
 			padding-top: 6.25rem;
 			padding-bottom: 5.625rem;
-			background: url('../imgs/webpage/contact-background.jpg') center bottom no-repeat;
+			background: url(imgs/webpage/contact-background.jpg) center bottom no-repeat;
 			background-size: cover; 
 		}
 		
@@ -93,7 +91,7 @@
 			width: 2.625rem;
 			height: 2.625rem;
 			border-radius: 1.875rem;
-			background: #2b369c url("../imgs/webpage/up-arrow.png") no-repeat center 47%;
+			background: #2b369c url(imgs/webpage/up-arrow.png) no-repeat center 47%;
 			background-size: 1.125rem 1.125rem;
 			text-indent: -9999px;
 		}
@@ -176,7 +174,7 @@
                 </li>
                 
                 <li class="nav-item">
-                    <a class="btn-solid-reg page-scroll" href="/login" stlye="margin-top: 2px; padding: 15px 20px 15px 20px;">LOGIN</a>
+                    <a class="btn-solid-reg page-scroll" th:href="@{/login}" stlye="margin-top: 2px; padding: 15px 20px 15px 20px;">LOGIN</a>
                 </li>
             </ul>
             <span class="nav-item social-icons">
@@ -441,67 +439,6 @@
         </div> <!-- end of container -->
     </div> <!-- end of basic-1 -->
     <!-- end of video -->
-
-
-
-    <!-- Details Lightboxes -->
-	<!-- Lightbox -->
-	<div id="details-lightbox-1" class="lightbox-basic zoom-anim-dialog mfp-hide">
-		<div class="row">
-			<button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
-			<div class="col-lg-6">
-				<img class="img-fluid" th:src="@{/imgs/webpage/details-lightbox-1.png}" alt="alternative">
-			</div>
-			<div class="col-lg-6">
-				<h3>Goals Setting</h3>
-				<hr>
-                <p>10PACHE can easily help you track your personal development evolution if you take the time to set it up.</p>
-                <h4>User Feedback</h4>
-                <p>This is a great app which can help you save time and make your live easier. And it will help improve your productivity levels.</p>
-                <p>You should definitely give it a try when you need a good app.</p>
-				<table>
-					<tr><td class="icon-cell"><i class="fas fa-desktop"></i></td><td>Responsive layout</td></tr>
-					<tr><td class="icon-cell"><i class="fas fa-bullhorn"></i></td><td>Distinctive CTAs</td></tr>
-					<tr><td class="icon-cell"><i class="fas fa-image"></i></td><td>Image gallery slider</td></tr>
-					<tr><td class="icon-cell"><i class="fas fa-envelope"></i></td><td>Contact forms</td></tr>
-					<tr><td class="icon-cell"><i class="fab fa-font-awesome-flag"></i></td><td>FontAwesome icons</td></tr>
-					<tr><td class="icon-cell"><i class="fas fa-code"></i></td><td>Well-structured code</td></tr>
-				</table>
-				<a class="btn-solid-reg" href="#your-link">DETAILS</a> <a class="btn-outline-reg mfp-close as-button" href="#details">BACK</a> 
-			</div>
-		</div> <!-- end of row -->
-    </div> <!-- end of lightbox-basic -->
-    <!-- end of lightbox -->
-    
-    <!-- Lightbox -->
-    <div id="details-lightbox-2" class="lightbox-basic zoom-anim-dialog mfp-hide">
-		<div class="row">
-			<button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
-			<div class="col-lg-6">
-				<img class="img-fluid" th:src="@{/imgs/webpage/details-lightbox-2.png}" alt="alternative">
-			</div>
-			<div class="col-lg-6">
-				<h3>Calendar Input</h3>
-				<hr>
-                <p>The calendar input function enables the user to setup training, meditation and relaxation sessions with ease.</p>
-                <h4>User Feedback</h4>
-                <p>This is a great app which can help you save time and make your live easier. And it will help improve your productivity levels.</p>
-                <p>You should definitely give it a try when you need a good app.</p>
-				<table>
-					<tr><td class="icon-cell"><i class="fas fa-desktop"></i></td><td>Responsive layout</td></tr>
-					<tr><td class="icon-cell"><i class="fas fa-bullhorn"></i></td><td>Distinctive CTAs</td></tr>
-					<tr><td class="icon-cell"><i class="fas fa-image"></i></td><td>Image gallery slider</td></tr>
-					<tr><td class="icon-cell"><i class="fas fa-envelope"></i></td><td>Contact forms</td></tr>
-					<tr><td class="icon-cell"><i class="fab fa-font-awesome-flag"></i></td><td>FontAwesome icons</td></tr>
-					<tr><td class="icon-cell"><i class="fas fa-code"></i></td><td>Well-structured code</td></tr>
-				</table>
-				<a class="btn-solid-reg" href="#your-link">DETAILS</a> <a class="btn-outline-reg mfp-close as-button" href="#details">BACK</a>
-			</div>
-		</div> <!-- end of row -->
-    </div> <!-- end of lightbox-basic -->
-    <!-- end of lightbox -->
-    <!-- end of details lightboxes -->
-
 
     <!-- Screenshots -->
     <div class="slider-2">
@@ -781,7 +718,7 @@ function SubForm(){
 	
 	if(nome != "" && email != "" && mensagem != "" && terms == true){
 		$.ajax({
-	        url:'/testeGratis/adicionarContato',
+	        url:'testeGratis/adicionarContato',
 	        type:'post',
 	        data: $('#formContato').serialize(),
 	        success:function(){

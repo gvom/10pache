@@ -66,9 +66,9 @@ public class ReciboRepositoryImpl implements IReciboRepository {
 		
 		String term = "";
     	if(usr.getTipoUsuario() != 0) {
-    		term = "and u.usuarioId = :usuarioId";
+    		term = " and u.usuarioId = :usuarioId ";
     		return this.manager.createQuery("from " + Recibo.class.getName() + " gu join fetch gu.usuario u "
-    				+ "where gu.status != 6 and and gu.status != 1 and gu.status != 5" + term + " order by gu.dataRecibo", Recibo.class)
+    				+ "where gu.status != 6 and gu.status != 1 and gu.status != 5" + term + " order by gu.dataRecibo", Recibo.class)
     				//.setParameter("dataVencimento", dataVencimento)
     				.setParameter("usuarioId", usr.getUsuarioId())
     				.getResultList();

@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link th:href="@{/plugins/webpage/css/styles.css}" rel="stylesheet">
 
+<link rel="icon" th:href="@{/imgs/webpage/favicon.png}">
 
 <!doctype html>
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
@@ -18,7 +19,7 @@
 
 <head>
 
-	<title>Teste Gratuito - Sistema para Gestão de Despache Automotivo Online</title>
+	<title>Teste Gratuito - Sistema para Gestão de Despache Automotivo</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 	<style>
@@ -194,7 +195,7 @@
 		cursor: pointer;
 	}
 	a.back-to-top {
-			background: #f79d2e url("../imgs/webpage/left-arrow.png") no-repeat center 47%;
+			background: #f79d2e url(../imgs/webpage/left-arrow.png) no-repeat center 47%;
 		}
 	</style>
 </head>
@@ -281,7 +282,7 @@
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title">Informações usuário de teste</h5>
+						<h5 class="modal-title" style="color: #3e3e3e;">Informações usuário de teste</h5>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
@@ -289,10 +290,10 @@
 					</div>
 					<div class="modal-body">
 						<center>
-							<p>LOGIN:</p>
-							<p id="login"></p>
-							<p>SENHA:</p>
-							<p id="senha"></p>
+							<p  style="color: #3e3e3e;">LOGIN:</p>
+							<p  style="color: #3e3e3e;" id="login"></p>
+							<p  style="color: #3e3e3e;">SENHA:</p>
+							<p  style="color: #3e3e3e;" id="senha"></p>
 						</center>
 					</div>
 					<div class="modal-footer">
@@ -372,7 +373,7 @@
 		}else{
 			$.ajax({
 		        type: "POST",
-		        url: '/testeGratis/gerarUsuarioTeste',
+		        url: 'gerarUsuarioTeste',
 		        data: {
 		        	cpf : cpf,
 		        	email: email,
