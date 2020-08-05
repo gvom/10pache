@@ -12,10 +12,10 @@ public class MvcConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
           .addResourceHandler("/arquivos/**")
-          .addResourceLocations("file:/sistema/media/gerencia/");
+          .addResourceLocations("file:/sistema/media/10pache/temp");
         registry
         .addResourceHandler("/imagens/**")
-        .addResourceLocations("file:/sistema/media/gerencia/galeria/");
+        .addResourceLocations("file:/sistema/media/10pache/galeria/");
         
         if (!registry.hasMappingForPattern("/webjars/**")) {
     		registry.addResourceHandler("/webjars/**").addResourceLocations(
