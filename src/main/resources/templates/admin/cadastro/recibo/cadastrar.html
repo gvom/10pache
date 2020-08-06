@@ -156,7 +156,7 @@
 								<div class="row">
 									<div class="form-group col-md-4">
 										<label class="control-label" for="nomeCompleto"> CPF/CNPJ</label>
-										<input type="text" class="form-control" th:field="*{cliente.cpf}" id="cpf" onchange="buscarPorCpf();" required="true">
+										<input type="text" class="form-control" th:field="*{cliente.cpf}" id="cpf" required="true">
 									</div>
 									<div class="form-group col-md-4">
 										<label class="control-label" for="nomeCompleto"> Identidade</label>
@@ -387,9 +387,7 @@
 				
 				$("#cpf").blur(function() {
 					
-					var cpf = $("#cpf").val();
-					console.log(cpf);
-					
+					var cpf = $("#cpf").val();					
 					$.ajax({
 				        type: "POST",
 				        url: '/recibo/buscarPorCpf',
@@ -507,13 +505,21 @@
 								else {
 									//CEP pesquisado não foi encontrado.
 									limpa_formulário_cep();
-									alert("CEP não encontrado.");
+									new PNotify({
+										title : 'Atenção!',
+										text : 'CEP não encontrado.',
+										type : 'error'
+									});
 								}
 							});
 						}else {
 							//cep é inválido.
 							limpa_formulário_cep();
-							alert("Formato de CEP inválido.");
+							new PNotify({
+								title : 'Atenção!',
+								text : 'Formato de CEP inválido!',
+								type : 'error'
+							});
 						}
 					} //end if.                                
 				});
