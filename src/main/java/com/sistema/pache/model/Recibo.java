@@ -36,13 +36,13 @@ public class Recibo implements Serializable{
 	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinColumn(name = "clienteId")
     private Cliente cliente;
-	@DateTimeFormat(pattern="yyyy-MM-dd'T'hh:mm")
+	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm")
     @Temporal(TemporalType.TIMESTAMP)
 	private Date dataVisturia;
-	@DateTimeFormat(pattern="yyyy-MM-dd'T'hh:mm")
+	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm")
     @Temporal(TemporalType.TIMESTAMP)
 	private Date dataRecibo;
-	@DateTimeFormat(pattern="yyyy-MM-dd'T'hh:mm")
+	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm")
     @Temporal(TemporalType.TIMESTAMP)
 	private Date dataEntrega;
 	@DateTimeFormat(pattern="dd/MM/yyyy")

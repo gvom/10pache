@@ -58,7 +58,8 @@
 									<tr>
 										<th class="col-md-1" th:if="${session.usrLogado.tipoUsuario == 0}">Codigo Usuário</th>
 										<th class="col-md-1">Codigo</th>
-										<th class="col-md-9">Desc</th>
+										<th class="col-md-7">Nome do Adquirinte</th>
+										<th class="col-md-2">Data Recibo</th>
 										<th class="col-md-1">Ação</th>
 									</tr>
 								</thead>
@@ -66,7 +67,8 @@
 									<tr th:each="recibos : ${lstRecibo}">
 										<td th:if="${session.usrLogado.tipoUsuario == 0}" th:text="${recibos.usuario.usuarioId}"></td>
 										<td th:text="${recibos.reciboId}" class="min-width"></td>
-										<td th:text="${recibos.placa}" class="min-width"></td>
+										<td th:text="${recibos.cliente.nome}" class="min-width"></td>
+										<td th:text="${recibos.dataRecibo}" class="min-width"></td>
 										<td align="center" style="width: 45px;">
 											<a th:onclick="'impress(' + ${recibos.reciboId} + ');'"><i class="fa fa-print" aria-hidden="true"></i></a>
 											&nbsp;
@@ -80,7 +82,8 @@
 									<tr>
 										<th class="col-md-1" th:if="${session.usrLogado.tipoUsuario == 0}">Codigo Usuário</th>
 										<th class="col-md-1">Codigo</th>
-										<th class="col-md-9">Nome</th>
+										<th class="col-md-7">Nome do Adquirinte</th>
+										<th class="col-md-2">Data Recibo</th>
 										<th class="col-md-1">Ação</th>
 									</tr>
 								</tfoot>
