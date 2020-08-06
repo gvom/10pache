@@ -153,14 +153,14 @@ public class ReciboController {
 	                return "redirect:/recibo/novo";
 	            }else{
 	            	if (recibo.getCliente().getClienteId() > 0) {
-	            		Cliente clienteTemp = recibo.getCliente();
-	            		clienteService.atualizar(clienteTemp);
 	            		if (recibo.getCliente().getEndereco().getIdEndereco() > 0) {
 	            			Endereco enderecoTemp = recibo.getCliente().getEndereco();
 	            			enderecoService.atualizar(enderecoTemp);
 	            		}
+	            		Cliente clienteTemp = recibo.getCliente();
+	            		clienteService.atualizar(clienteTemp);
 	            	}
-	            	recibo.setVeiculoId(salvarVeiculo(recibo, usr));
+	            	//recibo.setVeiculoId(salvarVeiculo(recibo, usr));
 	            	Recibo recTe = reciboService.buscarPorId(recibo.getReciboId());
 	            	recibo.getCliente().setUsuario(recTe.getUsuario());
 	            	recibo.setUsuario(recTe.getUsuario());
@@ -172,7 +172,30 @@ public class ReciboController {
 	            if (result.hasErrors()) {
 	            	return "redirect:/recibo/novo";
 	            } else {
-	            	recibo.setVeiculoId(salvarVeiculo(recibo, usr));
+	            	if (recibo.getCliente().getClienteId() > 0) {
+	            		if (recibo.getCliente().getEndereco().getIdEndereco() > 0) {
+	            			Endereco enderecoTemp = enderecoService.buscarPorId(recibo.getCliente().getEndereco().getIdEndereco());
+	            			enderecoTemp.setBairro(recibo.getCliente().getEndereco().getBairro());
+	            			enderecoTemp.setCep(recibo.getCliente().getEndereco().getCep());
+	            			enderecoTemp.setCidade(recibo.getCliente().getEndereco().getCidade());
+	            			enderecoTemp.setComplemento(recibo.getCliente().getEndereco().getComplemento());
+	            			enderecoTemp.setEstado(recibo.getCliente().getEndereco().getEstado());
+	            			enderecoTemp.setLogradouro(recibo.getCliente().getEndereco().getLogradouro());
+	            			enderecoTemp.setNumero(recibo.getCliente().getEndereco().getNumero());
+	            			enderecoTemp.setPais(recibo.getCliente().getEndereco().getPais());
+	            			recibo.getCliente().setEndereco(enderecoTemp);
+	            			enderecoService.atualizar(enderecoTemp);
+	            		}
+	            		Cliente clienteTemp = clienteService.buscarPorId(recibo.getCliente().getClienteId());
+	            		clienteTemp.setCpf(recibo.getCliente().getCpf());
+	            		clienteTemp.setEmail(recibo.getCliente().getEmail());
+	            		clienteTemp.setRg(recibo.getCliente().getRg());
+	            		clienteTemp.setTelefone(recibo.getCliente().getTelefone());
+	            		clienteTemp.setNome(recibo.getCliente().getNome());
+	            		recibo.setCliente(clienteTemp);
+	            		clienteService.atualizar(clienteTemp);
+	            	}
+	            	//recibo.setVeiculoId(salvarVeiculo(recibo, usr));
 	            	recibo.getCliente().setUsuario(usr);
 	            	recibo.setUsuario(usr);
 	            	recibo.setDataCadastro(new Date());
