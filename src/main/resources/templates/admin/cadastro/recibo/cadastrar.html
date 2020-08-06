@@ -550,6 +550,18 @@
 			        success: function (data) {
 			        	$("#pdfFrame").attr("src", data);
 			        	//$("#modal").modal('show');
+			        	$.blockUI({
+				             message: '<b><h3>Carregando..</h3></b>',
+				             baseZ: 99999,
+				             css: {            	
+				                 border: 'none',
+				                 padding: 'none',
+				                 backgroundColor: 'none',
+				                 '-webkit-border-radius': 'none',
+				                 '-moz-border-radius': 'none',
+				                 color: '#fff'
+				             }
+			        	});
 			        },
 			        error: function () {
 			            //alert('falhou');
@@ -560,6 +572,7 @@
 			        		pdfObject.focus();
 					        pdfObject.print();
 					        //$("#modal").modal('hide');
+					        $.unblockUI();
 					        removerpdf($("#pdfFrame").attr("src"));
 			        	}, 2000);
 			        }
