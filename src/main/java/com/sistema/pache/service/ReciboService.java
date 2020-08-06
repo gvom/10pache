@@ -2,6 +2,8 @@ package com.sistema.pache.service;
 
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -95,7 +97,7 @@ public class ReciboService {
 	}
 	
 	@Transactional
-    public void imprimirRecibo(HttpServletResponse response, int idRecibo) throws IOException, PrinterException, JRException {
+    public String imprimirRecibo(HttpServletResponse response, int idRecibo) throws IOException, PrinterException, JRException {
     	
     	Date dataAtual = new Date();
     	
@@ -149,52 +151,31 @@ public class ReciboService {
         JasperReport jasperReport = JasperCompileManager.compileReport(path);
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params);
         
-        String selectedPrinter = null;
-
-        PrinterJob printerJob = PrinterJob.getPrinterJob();
-        PrintService[] services = PrintServiceLookup.lookupPrintServices(null, null);
-        PrintService selectedService = null;
-
-        if(services.length != 0 || services != null)
-        {
-//            for(PrintService service : services){
-//                String existingPrinter = service.getName().toLowerCase();
-//                System.out.println(existingPrinter);
-//                //Seleciona a impressora homologada
-//                if(existingPrinter.equals("microsoft xps document writer"))
-//                {
-//                    selectedService = service;
-//                    break;
-//                }
-//            }
-
-            //Imprimir na impressora padrão do sistema
-        	selectedService = PrintServiceLookup.lookupDefaultPrintService();
-//            JasperPrintManager.printReport(jasperPrint, false);
-            
-            //Inicio da Impressão da Impressão com impressora homologada
-            if(selectedService != null){
-                printerJob.setPrintService(selectedService);
-                
-                JRExporter exporter = new JRPrintServiceExporter();
-    			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-    			exporter.setParameter(JRPrintServiceExporterParameter.PRINT_SERVICE_ATTRIBUTE_SET, selectedService.getAttributes());
-    			exporter.setParameter(JRPrintServiceExporterParameter.DISPLAY_PAGE_DIALOG, Boolean.FALSE);
-    			exporter.setParameter(JRPrintServiceExporterParameter.DISPLAY_PRINT_DIALOG, Boolean.FALSE);
-    			try {
-    				exporter.exportReport();
-				} catch (Exception e) {
-					
-				}
-    			
-            }else {
-            	//Download como PDF se não encontrar impressora
-                response.setContentType("application/pdf");
-                response.setHeader("Content-disposition", "attachment; filename=recibo.pdf");
-                final OutputStream outStream = response.getOutputStream();
-                JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
-            }
-            //Fim da Impressão da Impressão com impressora homologada
-        }	
+        String destFileName = servletContext.getInitParameter("arquivos") + File.separator + "galeria";
+        File dir = new File(destFileName);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        Date date = new Date();
+        destFileName += File.separator + date.getTime() + ".pdf";
+        
+//	    response.setContentType("application/pdf");
+//	    response.setHeader("Content-disposition", "attachment; filename=recibo.pdf");
+//	    final OutputStream outStream = response.getOutputStream();
+        
+	    JasperExportManager.exportReportToPdfFile(jasperPrint, destFileName);
+	    
+	    return  File.separator + "imagens" +  File.separator + date.getTime() + ".pdf";
+    }
+	
+	@Transactional
+    public boolean removerPdf(String path){
+                 
+        File arquivo = new File(servletContext.getInitParameter("arquivos") + File.separator + "galeria" + path);
+        if (arquivo.delete()) {
+            return true;            
+        } else {
+        	return false;
+        }
     }
 }

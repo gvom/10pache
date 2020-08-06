@@ -11,7 +11,7 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
-          .addResourceHandler("/arquivos/**")
+          .addResourceHandler("/pdfs/**")
           .addResourceLocations("file:/sistema/media/10pache/temp");
         registry
         .addResourceHandler("/imagens/**")

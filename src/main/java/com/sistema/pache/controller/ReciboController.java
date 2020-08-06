@@ -219,11 +219,17 @@ public class ReciboController {
 		return retorno;
 	}
 	
-	@RequestMapping("/recibo/imprimir/{idRecibo}")
-    public String imprimirRecibo(HttpServletResponse response, @PathVariable("idRecibo") int idRecibo) throws Exception{
-    	reciboService.imprimirRecibo(response, idRecibo);
-    	
-    	return "redirect:/recibo/lista";
+	@RequestMapping("/recibo/imprimir")
+    public @ResponseBody String imprimirRecibo(HttpServletResponse response, @RequestParam("idRecibo") int idRecibo) throws Exception{
+		return reciboService.imprimirRecibo(response, idRecibo);
+    }
+	
+	@RequestMapping("/recibo/removerPdf")
+    public @ResponseBody void removerPdf(@RequestParam("arquivo") String arquivo) throws Exception{
+		boolean verificar = reciboService.removerPdf(arquivo.split("imagens")[1]);
+		if(!verificar) {
+			System.out.println("ERROR:::: Não foi possivel deletar arquivo: "+arquivo+" do servidor!");
+		}
     }
 	
 	public int salvarVeiculo(Recibo recibo, Usuario usr) {

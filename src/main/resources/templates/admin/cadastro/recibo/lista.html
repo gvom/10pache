@@ -13,6 +13,20 @@
 .dt-buttons.btn-group {
     margin-bottom: 15px;
 }
+.iframe-container {
+  overflow: visible;
+  padding-top: 70%;
+  position: relative;
+}
+ 
+.iframe-container iframe {
+   border: 0;
+   height: 100%;
+   left: 0;
+   position: absolute;
+   top: 0;
+   width: 100%;
+}
 </style>
 </head>
 <body>
@@ -54,7 +68,7 @@
 										<td th:text="${recibos.reciboId}" class="min-width"></td>
 										<td th:text="${recibos.placa}" class="min-width"></td>
 										<td align="center" style="width: 45px;">
-											<a th:href="@{/recibo/imprimir/} + ${recibos.reciboId}"><i class="fa fa-print" aria-hidden="true"></i></a>
+											<a th:onclick="'impress(' + ${recibos.reciboId} + ');'"><i class="fa fa-print" aria-hidden="true"></i></a>
 											&nbsp;
 											<a th:href="@{/recibo/atualizar/} + ${recibos.reciboId}" class="menu-link"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 											&nbsp;
@@ -76,6 +90,14 @@
 				</div>
 			</div>
 		</section>
+		<div id="modal" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-xl">
+		    <div class="modal-content iframe-container">
+		      <iframe src="" width="100%" style="border: none;" id="pdfFrame"></iframe>
+		    </div>
+		  </div>
+		</div>
+		
 		<th:block layout:fragment="javascript-extra">
 			<script>
 				$( document ).ready(function() {
@@ -87,6 +109,45 @@
 		                buttons : [ 'csv', 'excel', 'pdf' ]
 		            });
 				});
+				
+				function impress(idRecibo){
+					$.ajax({
+				        type: "POST",
+				        url: '/recibo/imprimir',
+				        data: {
+				        	idRecibo : idRecibo
+				        },
+				        success: function (data) {
+				        	$("#pdfFrame").attr("src", data);
+				        	//$("#modal").modal('show');
+				        },
+				        error: function () {
+				            //alert('falhou');
+				        },
+				        complete: function (){
+				        	setTimeout(function(){
+				        		var pdfObject = document.getElementById("pdfFrame").contentWindow;
+				        		pdfObject.focus();
+						        pdfObject.print();
+						        //$("#modal").modal('hide');
+						        removerpdf($("#pdfFrame").attr("src"));
+				        	}, 2000);
+				        }
+				    });
+				}
+				
+				function removerpdf(arquivo){
+					$.ajax({
+				        type: "POST",
+				        url: '/recibo/removerPdf',
+				        data: {
+				        	arquivo : arquivo
+				        },
+				        error: function () {
+				            //alert('falhou');
+				        },
+				    });
+				}
 			</script>
 		</th:block>
 	</div>
