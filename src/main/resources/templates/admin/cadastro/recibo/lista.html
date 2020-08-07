@@ -68,7 +68,7 @@
 										<td th:if="${session.usrLogado.tipoUsuario == 0}" th:text="${recibos.usuario.usuarioId}"></td>
 										<td th:text="${recibos.reciboId}" class="min-width"></td>
 										<td th:text="${recibos.cliente.nome}" class="min-width"></td>
-										<td th:text="${recibos.dataRecibo}" class="min-width"></td>
+										<td th:text="${#dates.format(recibos.dataRecibo, 'dd/MM/yyyy')}" class="min-width"></td>
 										<td align="center" style="width: 45px;">
 											<a th:onclick="'impress(' + ${recibos.reciboId} + ');'"><i class="fa fa-print" aria-hidden="true"></i></a>
 											&nbsp;

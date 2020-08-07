@@ -105,7 +105,18 @@
 										<label class="control-label" for="nomeCompleto"> Nome</label>
 										<input class="form-control" th:field="*{nome}" id="nome" required="true"></input>
 									</div>
-
+									<div class="form-group col-md-3">
+										<label class="control-label" for="plano"> Plano</label>
+										<select class="form-control" th:field="*{plano}" id="plano">
+											<option value="basico">Básico</option>
+											<option value="padrão">Padrão</option>
+											<option value="premium">Premium</option>
+										</select>
+									</div>
+									<div class="form-group col-md-3">
+										<label class="control-label" for="plano"> Data de Cadastro</label>
+										<input class="form-control" th:value="${#dates.format(usuario.dtCadastro, 'dd/MM/yyyy')}" readonly="readonly"></input>
+									</div>
 								</div>
 								<div class="row">
 									<div class="form-group col-md-3">
@@ -120,6 +131,13 @@
 										<select class="form-control" th:field="*{status}" id="status">
 											<option value="0">Ativo</option>
 											<option value="1">Inativo</option>
+										</select>
+									</div>
+									<div class="form-group col-md-3">
+										<label class="control-label" for="teste"> Teste Grátis</label>
+										<select class="form-control" th:field="*{teste}" id="teste">
+											<option value="0" th:if="${usuario.tipoUsuario == 1}">Sim</option>
+											<option value="1">Não</option>
 										</select>
 									</div>
 								</div>
