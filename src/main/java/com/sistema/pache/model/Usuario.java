@@ -6,7 +6,13 @@
 package com.sistema.pache.model;
 
 import java.io.Serializable;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -172,6 +178,22 @@ public class Usuario implements Serializable {
 
 	public void setPlano(String plano) {
 		this.plano = plano;
+	}
+	
+	public int getDias() {
+		Date dt = this.dtCadastro;
+    	Calendar c = Calendar.getInstance(); 
+    	c.setTime(dt); 
+    	c.add(Calendar.DATE, 7);
+    	dt = c.getTime();
+    	Date now = new Date();
+    	//long diffInMillies = Math.abs(now.getTime() - dt.getTime());
+    	//long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+    	LocalDate prox = Instant.ofEpochMilli(dt.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+    	LocalDate ago = Instant.ofEpochMilli(now.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+    	Period period = Period.between(ago, prox);
+    	
+		return period.getDays();
 	}
 
 }
