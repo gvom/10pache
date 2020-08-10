@@ -187,8 +187,6 @@ public class Usuario implements Serializable {
     	c.add(Calendar.DATE, 7);
     	dt = c.getTime();
     	Date now = new Date();
-    	//long diffInMillies = Math.abs(now.getTime() - dt.getTime());
-    	//long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
     	LocalDate prox = Instant.ofEpochMilli(dt.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
     	LocalDate ago = Instant.ofEpochMilli(now.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
     	Period period = Period.between(ago, prox);
