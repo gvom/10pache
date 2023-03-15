@@ -54,9 +54,7 @@
   ```mvn clean package```
   
 4 - Run the project
-<br>5 - Open your web browser and go to 
-
-  ```http://localhost:8080```
+<br>5 - Open your web browser and go to: http://localhost:8080
   
 </p>
 
