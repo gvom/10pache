@@ -47,9 +47,7 @@
   
 Create a MySQL database and update the application.properties file in src/main/resources with your database configuration:
 
-  ```spring.datasource.url=jdbc:mysql://localhost:3306/your_database_name
-  spring.datasource.username=your_username
-  spring.datasource.password=your_password```
+  ```spring.datasource.url=jdbc:mysql://localhost:3306/your_database_name<br>spring.datasource.username=your_username<br>spring.datasource.password=your_password```
 
 Build the project using Maven:<br>
 
