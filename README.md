@@ -41,19 +41,20 @@
 
 ###
 
-<p align="left">Clone the repository:<br>
+<p align="left">1 - Clone the repository:<br>
   
   ```git clone https://github.com/your-username/vehicular-dispatch-management-system.git```
   
-Create a MySQL database and update the application.properties file in src/main/resources with your database configuration:
+2- Create a MySQL database and update the application.properties file in src/main/resources with your database configuration:
 
   ```spring.datasource.url=jdbc:mysql://localhost:3306/your_database_name<br>spring.datasource.username=your_username<br>spring.datasource.password=your_password```
 
-Build the project using Maven:<br>
+3 - Build the project using Maven:<br>
 
   ```mvn clean package```
   
-Run the project<br>Open your web browser and go to 
+4 - Run the project
+<br>5 - Open your web browser and go to 
 
   ```http://localhost:8080```
   
